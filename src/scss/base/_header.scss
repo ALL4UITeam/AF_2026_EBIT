@@ -1,0 +1,82 @@
+@use '../abstracts' as *;
+
+// ====== base ======
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    height: 100%;
+}
+// ====== app layout ======
+.app {
+    min-height: 100vh;
+    background: $bg;
+}
+
+.app-header {
+    z-index: 50;
+    padding: 20px;
+}
+
+.app-header__inner {
+    height: $header-h;
+    padding: 0 29px;
+    @include glass(0.60);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    &__mark {
+        width: 34px;
+        height: 34px;
+        border-radius: 50%;
+        background: conic-gradient(from 180deg, #1f6feb, #22c55e, #f59e0b, #ef4444, #1f6feb);
+        border: 2px solid rgba(255, 255, 255, 0.8);
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+    }
+
+    &__title {
+        font-size: 16px;
+        font-weight: 700;
+        letter-spacing: -0.2px;
+    }
+}
+
+.app-header__actions {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.user-chip {
+    border-radius: 999px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color:#7e8790;
+    font-size: 15px;
+    cursor: pointer;
+
+    &__icon {
+        @include icon(15px);
+        background-image: url('@/assets/images/common/ico-user.svg');
+    }
+}
+
+.icon-btn {
+    background: #0d2a44;
+    @include icon(15px);
+    background-image: url('@/assets/images/common/ico-home.svg');
+    width: 32px;
+    height: 32px;
+    border-radius: 999px;
+    cursor: pointer;
+}

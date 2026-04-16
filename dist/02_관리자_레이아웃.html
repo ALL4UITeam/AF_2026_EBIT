@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>앱 관리 | E-BIT 관리자</title>
+    <link rel="stylesheet" href="/2026_AF_EBIT/assets/fonts/pretendard.css">
+  <script type="module" src="/2026_AF_EBIT/assets/02_관리자_레이아웃.html.js"></script>
+  
+  <link rel="stylesheet" href="/2026_AF_EBIT/assets/style.css">
+</head>
+
+<body>
+    <div class="al-wrap">
+
+        <header class="al-header">
+            <div class="al-header__left">
+                <button type="button" class="al-header__menu-btn" id="alMenuBtn" aria-label="메뉴 열기">
+                    <span class="al-header__hamburger" aria-hidden="true"><span></span></span>
+                </button>
+                <a href="#" class="al-header__brand">
+                    <div class="al-header__logo">
+                        <img src="/2026_AF_EBIT/assets/images/logo.svg" width="18" height="18" alt="" />
+                    </div>
+                    <span class="al-header__brand-name">E-BIT</span>
+                </a>
+            </div>
+        
+            <div class="al-header__right">
+                <button type="button" class="al-header__notify" aria-label="알림">
+                    <span class="al-header__notify-icon" aria-hidden="true"></span>
+                </button>
+                <div class="al-header__user">
+                    <span class="al-header__user-name">관리자님</span>
+                    <div class="al-header__avatar" aria-hidden="true">
+                        <span class="al-header__avatar-icon"></span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div class="al-body">
+            <div class="al-backdrop" id="alBackdrop" aria-hidden="true"></div>
+
+            <aside class="al-sidenav" id="alSidenav" aria-label="주 메뉴">
+                <div class="al-sidenav__scroll">
+                    <ul class="al-sidenav__list">
+            
+                        <!-- 대시보드 (단일 메뉴) -->
+                        <li class="al-sidenav__item">
+                            <a href="#" class="al-sidenav__link">
+                                <span class="al-sidenav__icon al-sidenav__icon--m01" aria-hidden="true"></span>
+                                <span class="al-sidenav__label">대시보드</span>
+                            </a>
+                        </li>
+            
+                        <!-- 앱 관리 (2depth, 현재 활성) -->
+                        <li class="al-sidenav__item is-open" data-nav="app">
+                            <button type="button" class="al-sidenav__trigger" aria-expanded="true">
+                                <span class="al-sidenav__icon al-sidenav__icon--m02" aria-hidden="true"></span>
+                                <span class="al-sidenav__label">앱 관리</span>
+                                <span class="al-sidenav__arrow" aria-hidden="true"></span>
+                            </button>
+                            <ul class="al-sidenav__sub">
+                                <li class="al-sidenav__subitem">
+                                    <a href="#" class="al-sidenav__sublink is-active">앱 관리</a>
+                                </li>
+                                <li class="al-sidenav__subitem">
+                                    <a href="#" class="al-sidenav__sublink">배포 관리</a>
+                                </li>
+                            </ul>
+                        </li>
+            
+                        <!-- 단말 관리 -->
+                        <li class="al-sidenav__item">
+                            <a href="#" class="al-sidenav__link">
+                                <span class="al-sidenav__icon al-sidenav__icon--m03" aria-hidden="true"></span>
+                                <span class="al-sidenav__label">단말 관리</span>
+                            </a>
+                        </li>
+            
+                        <!-- 컨텐츠 관리 -->
+                        <li class="al-sidenav__item">
+                            <a href="#" class="al-sidenav__link">
+                                <span class="al-sidenav__icon al-sidenav__icon--m04" aria-hidden="true"></span>
+                                <span class="al-sidenav__label">컨텐츠 관리</span>
+                            </a>
+                        </li>
+            
+                        <!-- 장비분석 -->
+                        <li class="al-sidenav__item">
+                            <a href="#" class="al-sidenav__link">
+                                <span class="al-sidenav__icon al-sidenav__icon--m05" aria-hidden="true"></span>
+                                <span class="al-sidenav__label">장비분석</span>
+                            </a>
+                        </li>
+            
+                        <!-- 운영관리 -->
+                        <li class="al-sidenav__item">
+                            <a href="#" class="al-sidenav__link">
+                                <span class="al-sidenav__icon al-sidenav__icon--m06" aria-hidden="true"></span>
+                                <span class="al-sidenav__label">운영관리</span>
+                            </a>
+                        </li>
+            
+                        <!-- 시스템관리 -->
+                        <li class="al-sidenav__item">
+                            <a href="#" class="al-sidenav__link">
+                                <span class="al-sidenav__icon al-sidenav__icon--m07" aria-hidden="true"></span>
+                                <span class="al-sidenav__label">시스템관리</span>
+                            </a>
+                        </li>
+            
+                    </ul>
+                </div>
+            </aside>
+
+            <main class="al-content" id="alContent">
+            
+                <!-- Page Header (배너) -->
+                <section class="al-page-header" aria-labelledby="alPageTitle">
+                    <div class="al-page-header__inner">
+                        <div class="al-page-header__left">
+                            <div class="al-page-header__icon-wrap">
+                                <span class="al-page-header__icon" aria-hidden="true"></span>
+                            </div>
+                            <div class="al-page-header__text">
+                                <h1 class="al-page-header__title" id="alPageTitle">앱 관리</h1>
+                                <p class="al-page-header__desc">
+                                    전 노선의 운행 상태를 실시간으로 모니터링하고, 사용자 앱에 송출되는 정보를 효율적으로 제어합니다
+                                </p>
+                            </div>
+                        </div>
+                        <div class="al-page-header__meta">
+                            <ol class="al-page-header__breadcrumb">
+                                <li><a href="#">홈</a></li>
+                                <li><span>앱 관리</span></li>
+                                <li><span>앱 관리</span></li>
+                            </ol>
+                            <button type="button" class="al-page-header__close" aria-label="닫기">&times;</button>
+                        </div>
+                    </div>
+                </section>
+            
+                <!-- Page Body -->
+                <section class="al-page-body" aria-label="본문">
+                    <p class="al-page-body__placeholder">페이지 본문 영역 (표 · 그리드 · 차트 등 확장 예정)</p>
+                </section>
+            
+            </main>
+        </div>
+
+    </div>
+</body>
+
+</html>

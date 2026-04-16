@@ -1,0 +1,197 @@
+// =========================
+//   로그인 페이지 (K-VOMS)
+// =========================
+
+.login-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  background-image: url('@/assets/images/common/ico-home.svg');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+
+
+// ----- 카드 -----
+.login-card {
+  position: relative;
+  z-index: 5;
+  width: 100%;
+  max-width: 500px;
+  padding: 60px 40px;
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 20px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.login-card__logo {
+  margin: auto;
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.login-card__title {
+  margin: 0 0 6px;
+  font-size: 26px;
+  font-weight: 700;
+  color: #2c3e50;
+  text-align: center;
+  letter-spacing: -0.02em;
+}
+
+.login-card__subtitle {
+  margin: 0 0 32px;
+  font-size: 12px;
+  color: #6b7c8d;
+  text-align: center;
+  line-height: 1.4;
+}
+
+.login-card__form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.login-card__field {
+  position: relative;
+
+  &--password {
+    .login-card__input {
+      padding-right: 48px;
+    }
+  }
+}
+
+.login-card__input {
+  width: 100%;
+  height: 60px;
+  padding: 0 16px;
+  font-size: 14px;
+  color: #2c3e50;
+  background: rgba(204, 212, 218, 0.9);
+  border-radius: 999px;
+  box-sizing: border-box;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  border: none;
+  &::placeholder {
+    color: #fff;
+  }
+
+  &:focus {
+    outline: none;
+    border-color: #5a9fd9;
+  }
+}
+
+.login-card__toggle-pw {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-card__toggle-pw-icon {
+  width: 23px;
+  height: 21px;
+  position: relative;
+  display: block;
+  background-image: url('@/assets/images/common/ico-home.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.login-card__toggle-pw.is-visible .login-card__toggle-pw-icon {
+  background-image: url('@/assets/images/common/ico-home.svg');
+
+}
+
+.login-card__remember {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 4px 0 0;
+  width: fit-content;
+  font-size: 14px;
+  color: #2c3e50;
+  cursor: pointer;
+  user-select: none;
+
+  input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    accent-color: #5a9fd9;
+    cursor: pointer;
+    border-radius: 3px;
+    border: 1px solid #Fff;
+  }
+  span{
+    color:#fff;
+  }
+}
+
+.login-card__submit {
+  width: 100%;
+  height: 60px;
+  margin-top: 8px;
+  font-size: 19px;
+  font-weight: 600;
+  color: #003863;
+  background: #fff;
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: opacity 0.2s, box-shadow 0.2s;
+  box-shadow: 0 4px 14px rgba(90, 159, 217, 0.35);
+
+  &:hover {
+    opacity: 0.95;
+    box-shadow: 0 6px 18px rgba(90, 159, 217, 0.4);
+  }
+
+  &:active {
+    opacity: 0.9;
+  }
+}
+
+.login-card__links {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding-top: 20px;
+}
+
+.login-card__link {
+  font-size: 15px;
+  color: #fff;
+  text-decoration: none;
+  transition: color 0.2s;
+
+  &:hover {
+    color: #4a8fc8;
+    text-decoration: underline;
+  }
+}
+
+.login-card__link-divider {
+  font-size: 12px;
+  color: #b0bcc8;
+  user-select: none;
+}

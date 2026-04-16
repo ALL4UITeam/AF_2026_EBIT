@@ -1,0 +1,19 @@
+@use '../abstracts' as *;
+
+.badge{
+    flex-shrink: 0;
+    min-width: 58px;
+    padding: 6px 10px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 600;
+    text-align: center;
+    color: #fff;
+
+    &--safe   { background: #12b886; }  // 안정
+    &--warn   { background: #f59f00; }  // 보통
+    &--danger { background: #fa5252; }  // 불안정
+    &--none   { background: #868e96; }  // 없음
+    &--info   { background: #228be6; }  // 정보
+    &--new    { background: #f44336; }  // NEW 뱃지 (빨간색)
+}

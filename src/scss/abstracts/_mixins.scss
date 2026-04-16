@@ -1,0 +1,17 @@
+@use 'variables' as *;
+
+// ====== mixins ======
+@mixin glass($alpha: 0.82) {
+    background: rgba(255, 255, 255, $alpha);
+    border: 1px solid $border-white;
+    border-radius: $radius-sm;
+    box-shadow: $shadow;
+}
+
+@mixin icon($size: 10px) {
+    display: inline-block;
+    width: $size;
+    height: $size;
+    background-repeat: no-repeat;
+    background-position: center;
+}

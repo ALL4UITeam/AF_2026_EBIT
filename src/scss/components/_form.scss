@@ -1,0 +1,614 @@
+@use '../abstracts' as *;
+
+.filter-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    margin-bottom: 20px;
+
+    &__group {
+        display: flex;
+        gap: 12px;
+        flex: 1;
+    }
+
+    // 공통 필드 (select / input / datepicker 전부)
+    &__field {
+        position: relative;
+        display: flex;
+        align-items: center;
+        gap: 28px;
+        height: 56px;
+        padding: 0 18px;
+        border-radius: 999px;
+        border: 1px solid #fff;
+        background: #f3f5f9;
+        transition: border-color .2s ease, box-shadow .2s ease;
+        flex: 1;
+        &:focus-within {
+            border-color: #0b3a63;
+            box-shadow: 0 0 0 3px rgba(11, 58, 99, .08);
+            background: #fff;
+        }
+        input,
+        select {
+            width: 100%;height: 100%;
+            border: 0;
+            background: transparent;
+            outline: none;
+            font-size: 14px;
+            color: #333;
+            appearance: none;
+        }
+        select {
+            padding-right: 28px; // 화살표 공간
+            cursor: pointer;
+            appearance: none;
+        }
+
+        // select 화살표
+        &:has(select)::after {
+            content: '';
+            position: absolute;
+            right: 30px;
+            top: 50%;
+            width: 6px;
+            height: 6px;
+            border-right: 2px solid #6b7280;
+            border-bottom: 2px solid #6b7280;
+            transform: translateY(-50%) rotate(45deg);
+            pointer-events: none;
+            transition: transform .2s ease;
+        }
+
+        &:has(select:focus)::after {
+            transform: translateY(-50%) rotate(-135deg);
+        }
+        
+        // select 활성화 상태
+        &:has(select:focus) {
+            border-color: #0b3a63;
+            box-shadow: 0 0 0 3px rgba(11, 58, 99, .08);
+        }
+            
+        .ico {
+            width: 18px;
+            height: 18px;
+            opacity: .6;
+            flex-shrink: 0;
+        }
+    }
+
+    // 검색 버튼
+    &__search {
+        height: 56px;
+        padding: 0 36px;
+        border-radius: 999px;
+        border: none;
+        background: #0b3a63;
+        color: #fff;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        cursor: pointer;
+        transition: background .2s ease, transform .15s ease;
+
+        .ico {
+            @include icon(16px);
+            background-image: url('@/assets/images/common/ico-home.svg');
+            
+            filter: brightness(200%);
+        }
+
+        &:hover {
+            background: #0f4a7c;
+            transform: translateY(-1px);
+        }
+
+        &:active {
+            transform: translateY(0);
+        }
+    }
+}
+
+// ====== 공통 폼 스타일 ======
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    min-width: 0;
+    width: 100%;
+    
+    &--two-column {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px 16px;
+        
+        .form-group {
+            margin: 0;
+        }
+        
+        .form-group--full {
+            grid-column: 1 / -1;
+        }
+        
+        .form-actions {
+            grid-column: 1 / -1;
+        }
+    }
+    
+    &--horizontal {
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: flex-end;
+        
+        .form-group {
+            flex: 1;
+            min-width: 200px;
+        }
+    }
+    
+    &--compact {
+        gap: 16px;
+        
+        &--two-column {
+            gap: 16px 12px;
+        }
+    }
+    
+    &--spacious {
+        gap: 24px;
+        
+        &--two-column {
+            gap: 24px 20px;
+        }
+    }
+}
+
+// ====== 폼 그룹 ======
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-width: 0;
+
+    &--inline {
+        flex-direction: row;
+        align-items: center;
+        gap: 12px;
+        
+        .form-label {
+            margin: 0;
+            min-width: 120px;
+        }
+        
+        .form-field {
+            flex: 1;
+        }
+    }
+}
+
+// ====== 폼 레이블 ======
+.form-label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #333;
+    margin: 0;
+    
+    .required {
+        color: #f44336;
+        margin-left: 2px;
+    }
+    
+    // 작은 레이블
+    &--small {
+        font-size: 13px;
+        font-weight: 500;
+    }
+}
+
+.form-hint {
+    font-size: 12px;
+    color: #888;
+    margin: 4px 0 0;
+    padding: 0;
+}
+
+/* 입력란 + 버튼 한 줄 (아이디 + 중복확인 등): 필드는 form-field, 버튼은 밖에 */
+.form-field-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    min-width: 0;
+
+    .form-field {
+        flex: 1;
+        min-width: 0;
+    }
+
+    .btn {
+        flex-shrink: 0;
+    }
+}
+
+// ====== 폼 필드 ======
+.form-field {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    height: 40px;
+    padding: 0 14px;
+    border-radius: 6px;
+    border: 1px solid #e0e0e0;
+    background: #fff;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    box-sizing: border-box;
+
+    &--inline {
+        flex: 0 0 auto;
+        width: auto;
+    }
+
+    /* 입력 + 버튼 한 줄 (아이디 + 중복확인 등) */
+    &--has-btn {
+        input {
+            flex: 1;
+            min-width: 0;
+            width: auto;
+        }
+    }
+
+    &--with-icon {
+        padding-right: 44px;
+
+        .form-field__toggle-pw {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 28px;
+            height: 28px;
+            padding: 0;
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+
+            &:hover {
+                color: #333;
+            }
+
+            .ico-pw {
+                @include icon(20px);
+                background-image: url('@/assets/images/common/ico-home.svg');
+                background-size: contain;
+            }
+
+            /* on: 비밀번호 표시 중일 때 */
+            &[aria-pressed="true"] .ico-pw,
+            &.is-on .ico-pw {
+                background-image: url('@/assets/images/common/ico-home.svg');
+            }
+        }
+    }
+
+    &:focus-within {
+        border-color: #2196F3;
+        box-shadow: 0 0 0 3px rgba(33, 150, 243, 0.1);
+    }
+    
+    &.error {
+        border-color: #f44336;
+        
+        &:focus-within {
+            border-color: #f44336;
+            box-shadow: 0 0 0 3px rgba(244, 67, 54, 0.1);
+        }
+    }
+    
+    &.disabled {
+        background: #f5f5f5;
+        cursor: not-allowed;
+        opacity: 0.6;
+    }
+    
+    input,
+    select,
+    textarea {
+        width: 100%;
+        height: 100%;
+        border: 0;
+        background: transparent;
+        outline: none;
+        font-size: 14px;
+        color: #333;
+        appearance: none;
+        
+        &:disabled {
+            cursor: not-allowed;
+        }
+        
+        &::placeholder {
+            color: #999;
+        }
+    }
+    
+    textarea {
+        height: auto;
+        min-height: 80px;
+        padding: 10px 0;
+        resize: vertical;
+    }
+    
+    select {
+        padding-right: 24px;
+        cursor: pointer;
+    }
+    
+    // select 화살표
+    &:has(select)::after {
+        content: '';
+        position: absolute;
+        right: 14px;
+        top: 50%;
+        width: 6px;
+        height: 6px;
+        border-right: 2px solid #666;
+        border-bottom: 2px solid #666;
+        transform: translateY(-50%) rotate(45deg);
+        pointer-events: none;
+        transition: transform 0.2s ease;
+    }
+    
+    &:has(select:focus)::after {
+        transform: translateY(-50%) rotate(-135deg);
+    }
+    
+    // select 활성화 상태
+    &:has(select:focus) {
+        border-color: #2196F3;
+        box-shadow: 0 0 0 3px rgba(33, 150, 243, 0.1);
+    }
+    
+    .ico {
+        width: 16px;
+        height: 16px;
+        opacity: 0.6;
+        flex-shrink: 0;
+        background-size: contain;
+    }
+    
+    // 크기 변형
+    &--small {
+        height: 32px;
+        padding: 0 10px;
+        font-size: 13px;
+    }
+    
+    &--large {
+        height: 48px;
+        padding: 0 18px;
+        font-size: 15px;
+    }
+}
+
+// ====== 폼 액션 ======
+.form-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 8px;
+    
+    &--right {
+        justify-content: flex-end;
+    }
+    
+    &--center {
+        justify-content: center;
+    }
+    
+    &--space-between {
+        justify-content: space-between;
+    }
+    
+    &--full {
+        .btn {
+            width: 100%;
+            justify-content: center;
+        }
+    }
+    
+    .btn {
+        padding: 12px 24px;
+        font-size: 15px;
+    }
+}
+
+// ====== 폼 도움말 텍스트 ======
+.form-help {
+    font-size: 12px;
+    color: #666;
+    margin-top: 4px;
+    
+    &--error {
+        color: #f44336;
+    }
+    
+    &--success {
+        color: #4caf50;
+    }
+}
+
+// ====== 파일 업로드 영역 ======
+.file-upload-area {
+    width: 100%;
+}
+
+.file-upload-label {
+    display: block;
+    width: 100%;
+    min-height: 200px;
+    border: 2px dashed #d0d0d0;
+    border-radius: 8px;
+    background: #fafafa;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    
+    &:hover {
+        border-color: #2196F3;
+        background: #f5f9ff;
+    }
+    
+    input[type="file"]:focus + &,
+    &:has(input[type="file"]:focus) {
+        border-color: #2196F3;
+        box-shadow: 0 0 0 3px rgba(33, 150, 243, 0.1);
+    }
+}
+
+.file-upload-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 40px 20px;
+    text-align: center;
+    
+    .ico {
+        width: 48px;
+        height: 48px;
+        opacity: 0.5;
+    }
+    
+    p {
+        margin: 0;
+        font-size: 15px;
+        font-weight: 600;
+        color: #333;
+    }
+    
+    .file-upload-hint {
+        font-size: 13px;
+        color: #999;
+    }
+}
+
+.file-list {
+    margin-top: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.file-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 16px;
+    background: #f5f5f5;
+    border-radius: 6px;
+    border: 1px solid #e0e0e0;
+    
+    &__info {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        flex: 1;
+        min-width: 0;
+        
+        .ico {
+            width: 20px;
+            height: 20px;
+            flex-shrink: 0;
+        }
+    }
+    
+    &__name {
+        font-size: 14px;
+        color: #333;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+    
+    &__size {
+        font-size: 12px;
+        color: #999;
+        margin-left: 8px;
+    }
+    
+    &__remove {
+        background: none;
+        border: none;
+        padding: 4px 8px;
+        cursor: pointer;
+        color: #f44336;
+        font-size: 14px;
+        transition: background 0.2s ease;
+        border-radius: 4px;
+        
+        &:hover {
+            background: #fee;
+        }
+    }
+}
+
+// ====== Select 옵션 스타일 (드롭다운) ======
+// 참고: 네이티브 select의 option 스타일링은 브라우저 제한이 많습니다
+// 완전한 커스터마이징을 위해서는 커스텀 드롭다운 컴포넌트가 필요할 수 있습니다
+
+select {
+    // 드롭다운 리스트 스타일
+    &::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: #ccc;
+        border-radius: 3px;
+        
+        &:hover {
+            background: #999;
+        }
+    }
+    
+    // 옵션 기본 스타일
+    option {
+        padding: 10px 14px;
+        background: #fff !important;
+        color: #333 !important;
+        font-size: 14px;
+        line-height: 1.5;
+    }
+    
+    // 선택된 옵션 (Chrome/Edge에서만 작동)
+    option:checked {
+        background: #2196F3 !important;
+        color: #fff !important;
+    }
+    
+    // 활성화 상태
+    &:focus {
+        color: #333;
+    }
+}
+
+// form-field 내부 select 활성화 시 추가 스타일
+.form-field:has(select:focus),
+.filter-bar__field:has(select:focus) {
+    select {
+        color: #333;
+    }
+}

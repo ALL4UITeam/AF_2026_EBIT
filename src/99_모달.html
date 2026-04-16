@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>E-bit 관리자</title>
+    {{> meta}}
+
+</head>
+
+<body>
+    <div class="app">
+        {{> header}}
+        <div class="app-body">
+            {{> nav}}
+            <main class="app-main" >
+                <div class="page">
+                    <header class="page__head">
+                        <h2 class="page__title">Modal</h2>
+                    </header>
+
+                    <div class="dashboard" style="display: flex; gap: 12px; flex-wrap: wrap;">
+                        <button class="btn btn--primary" data-modal-open="fileUploadModal">파일 업로드</button>
+                        <button class="btn btn--outline-primary" data-modal-open="uploadHistoryModal">업로드 이력</button>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+</body>

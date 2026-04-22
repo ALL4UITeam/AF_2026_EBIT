@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>앱 대시보드 | E-BIT 관리자</title>
+    {{> meta}}
+</head>
+
+<body class="al-admin">
+    <div class="al-wrap">
+
+        {{> header }}
+
+        <div class="al-body">
+            <div class="al-backdrop" id="alBackdrop" aria-hidden="true"></div>
+
+            {{> nav }}
+
+            {{> admin-content-app-dashboard }}
+        </div>
+
+    </div>
+    <script type="module" src="./js/page/index.js"></script>
+</body>
+
+</html>

@@ -1,77 +1,91 @@
 // Base + type + size (한 버튼에 size modifier 1개)
+.btn,
 .al-btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
+    gap: 6px;
     border: 1px solid transparent;
-    border-radius: var(--al-radius-md);
+    border-radius: 4px;
     cursor: pointer;
-    font-weight: 700;
-    padding: 0 16px;
+    font-weight: 500;
+    padding: 0 14px;
     font-family: inherit;
     transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
 
     &:disabled {
-        background: #dbe1f0;
-        color: #95a0bb;
-        border-color: #dbe1f0;
+        background: #e7edf4;
+        color: #9aa8b7;
+        border-color: #e7edf4;
         cursor: not-allowed;
     }
 
-    // --- sizes (단일 modifier) ---
-    &--xl {
-        height: 48px;
-        font-size: 15px;
+}
+
+// --- sizes (단일 modifier) ---
+.btn--xl,
+.al-btn--xl {
+    height: 56px;
+    font-size: 19px;
+    border-radius: 8px;
+}
+
+.btn--lg,
+.al-btn--lg {
+    height: 48px;
+    font-size: 17px;
+    border-radius: 6px;
+}
+
+.btn--md,
+.al-btn--md {
+    height: 40px;
+    font-size: 15px;
+    border-radius: 6px;
+}
+
+.btn--sm,
+.al-btn--sm {
+    height: 32px;
+    font-size: 15px;
+    border-radius: 4px;
+}
+
+.btn--xs,
+.al-btn--xs {
+    height: 26px;
+    font-size: 12px;
+}
+
+// --- types ---
+.btn--primary,
+.al-btn--primary {
+    background: var(--al-color-primary);
+    color: #fff;
+
+    &:hover:not(:disabled) {
+        background: var(--al-color-primary-light);
     }
+}
 
-    &--lg {
-        height: 44px;
-        font-size: 15px;
+.btn--secondary,
+.al-btn--secondary {
+    background: var(--al-color-surface);
+    border-color: var(--al-color-border);
+    color: var(--al-color-text);
+
+    &:hover:not(:disabled) {
+        background: var(--al-color-surface-soft);
     }
+}
 
-    &--md {
-        height: 40px;
-        font-size: 14px;
-    }
+.btn--tertiary,
+.al-btn--tertiary {
+    background: var(--al-color-tertiary-bg);
+    color: var(--al-color-tertiary-text);
+    border-color: transparent;
 
-    &--sm {
-        height: 36px;
-        font-size: 13px;
-    }
-
-    &--xs {
-        height: 32px;
-        font-size: 12px;
-    }
-
-    // --- types ---
-    &--primary {
-        background: var(--al-color-primary);
-        color: #fff;
-
-        &:hover:not(:disabled) {
-            background: var(--al-color-primary-dark);
-        }
-    }
-
-    &--secondary {
-        background: var(--al-color-surface);
-        border-color: #b4b9cf;
-        color: var(--al-color-text);
-
-        &:hover:not(:disabled) {
-            background: #f8f9ff;
-        }
-    }
-
-    &--tertiary {
-        background: var(--al-color-tertiary-bg);
-        color: var(--al-color-tertiary-text);
-        border-color: transparent;
-
-        &:hover:not(:disabled) {
-            filter: brightness(0.97);
-        }
+    &:hover:not(:disabled) {
+        filter: brightness(0.97);
     }
 }

@@ -1,38 +1,44 @@
+.pagination,
 .al-pagination {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 10px;
     flex-wrap: wrap;
+    justify-content: center;
+
+    [data-al-page-first],
+    [data-al-page-last] {
+        display: none;
+    }
 
     &__nav {
-        display: flex;
+        display: inline-flex;
         align-items: center;
-        gap: 4px;
-        height: 40px;
-        padding: 0 8px;
+        justify-content: center;
+        gap: 3px;
+        height: 28px;
+        padding: 0;
         border: none;
         background: transparent;
         cursor: pointer;
-        font-size: 17px;
-        color: #464c53;
-        border-radius: 6px;
+        font-size: 12px;
+        font-weight: 500;
+        color: #33363d;
+        border-radius: 4px;
         font-family: inherit;
         white-space: nowrap;
 
-        svg {
-            color: currentColor;
-        }
-
         &:hover:not(:disabled) {
-            background: #f1f5f9;
+            color: var(--al-color-primary);
         }
 
         &:disabled {
             color: #8a949e;
             cursor: not-allowed;
+            opacity: 0.55;
 
             &:hover {
-                background: transparent;
+                color: #8a949e;
             }
         }
 
@@ -45,29 +51,31 @@
     &__pages {
         display: flex;
         align-items: center;
-        gap: 8px;
+        gap: 10px;
         flex-wrap: wrap;
     }
 
     &__page {
-        width: 40px;
-        height: 40px;
-        border-radius: 6px;
+        min-width: 26px;
+        height: 28px;
+        padding: 0 7px;
+        border-radius: 4px;
         border: none;
         background: transparent;
         cursor: pointer;
-        font-size: 17px;
-        color: #464c53;
+        font-size: 12px;
+        font-weight: 500;
+        color: #33363d;
         font-family: inherit;
 
         &:hover:not(&--active):not(:disabled) {
-            background: #f1f5f9;
+            color: var(--al-color-primary);
         }
 
         &--active {
             background: var(--al-color-pagination-active-bg);
             color: var(--al-color-pagination-active-fg);
-            font-weight: 700;
+            font-weight: 800;
         }
 
         &:disabled {
@@ -81,14 +89,22 @@
     }
 
     &__ellipsis {
-        width: 40px;
-        height: 40px;
+        min-width: 26px;
+        height: 28px;
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 17px;
-        color: #464c53;
+        font-size: 12px;
+        color: #33363d;
         letter-spacing: 1px;
         user-select: none;
+    }
+
+    &__nav--prev::before {
+        content: '<';
+    }
+
+    &__nav--next::after {
+        content: '>';
     }
 }

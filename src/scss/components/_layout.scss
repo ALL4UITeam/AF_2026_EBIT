@@ -5,15 +5,14 @@
 // ============================================================
 $al-sidenav-w: 240px;
 $al-header-h: 80px;
-$al-bg: #F8FAFC;
-$al-header-bg: #fff;
-$al-sidenav-bg: #002236;
-$al-sidenav-active-bg: rgba(28, 140, 244, 1);
-$al-sidenav-hover-bg: rgba(28, 140, 244, 0.2);
+$al-bg: #F9FAFC;
+$al-header-bg: #F9FAFC;
+$al-sidenav-bg: #052031;
+$al-sidenav-active-bg: #1276A7;
+$al-sidenav-hover-bg: rgba(18, 118, 167, 0.2);
 $al-text-light: rgba(255, 255, 255, 0.92);
 $al-text-muted: rgba(255, 255, 255, 0.55);
 $al-content-pad: 24px;
-$al-content-pad-tablet: 16px;
 $al-tablet-bp: 1279px;
 $al-transition: 0.28s cubic-bezier(0.4, 0, 0.2, 1);
 
@@ -129,7 +128,7 @@ body.al-admin {
     width: 32px;
     height: 32px;
     border-radius: 8px;
-    background: linear-gradient(135deg, #4f46e5, #06b6d4);
+    background: linear-gradient(135deg, #1276A7, #052031);
     display: grid;
     place-items: center;
 
@@ -461,15 +460,14 @@ body.al-admin {
     flex-direction: column;
     overflow-y: auto;
     overflow-x: hidden;
-    padding: $al-content-pad;
+    padding: 0 110px 20px;
 }
 
 // ----- Page Header (banner) -----
 .al-page-header {
     position: relative;
     border-radius: 16px;
-    padding: 28px 32px;
-    margin-bottom: 24px;
+    margin-bottom: 40px;
     &::before {
         content: '';
         position: absolute;
@@ -547,13 +545,8 @@ body.al-admin {
 }
 // ----- Page Body -----
 .al-page-body {
-
     flex: 0 0 auto;
     border-radius: 16px;
-    padding: 28px;
-    background: #fff;
-    border: 1px solid rgba(0, 0, 0, 0.06);
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.03);
 }
 
 .al-page-body__placeholder {

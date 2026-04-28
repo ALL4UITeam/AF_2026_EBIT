@@ -84,14 +84,14 @@
 		select {
 			border: 1px solid #d0d7de;
 			border-radius: 4px;
-			font-size: 13px;
+			font-size: 15px;
 			background: #fff;
 			padding: 10px;
 			width: 85px;
 			&:focus {
 				outline: none;
-				border-color: #2196F3;
-				box-shadow: 0 0 0 2px rgba(33, 150, 243, .15);
+				border-color: var(--al-color-primary);
+				box-shadow: 0 0 0 2px rgba(18, 118, 167, .15);
 			}
 			&[readonly] {
 				background: #f5f5f5;
@@ -229,11 +229,69 @@
    6. 상태 색상
 ========================= */
 .change--positive {
-	color: #2196F3;
+	color: var(--al-color-primary);
 	font-weight: 600;
 }
 
 .change--negative {
 	color: #f44336;
 	font-weight: 600;
+}
+
+/* =========================
+   7. BEM 공통 테이블
+========================= */
+.table {
+	display: grid;
+	grid-template-columns: repeat(var(--column-count, 5), 1fr);
+	width: 100%;
+	background: #fff;
+	color: var(--al-color-text);
+
+	&__header,
+	&__body {
+		grid-column: 1 / -1;
+		display: grid;
+		grid-template-columns: subgrid;
+	}
+
+	&__header {
+		background: var(--al-color-surface-tint);
+		border-radius: 12px;
+		font-weight: 700;
+	}
+
+	&__row {
+		grid-column: 1 / -1;
+		display: grid;
+		grid-template-columns: subgrid;
+		border-bottom: 1px solid #e6ebf5;
+
+		&:last-child {
+			border-bottom: 0;
+		}
+	}
+
+	&__cell {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		min-width: 0;
+		padding: 14px 12px;
+		font-size: 15px;
+	}
+
+	&__link {
+		display: block;
+		width: 100%;
+		min-width: 0;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+		color: var(--al-color-primary);
+	}
+
+	&--wide {
+		grid-template-columns: repeat(var(--column-count), minmax(80px, 1fr));
+	}
 }

@@ -1,3 +1,4 @@
+.modal-backdrop,
 .al-modal-backdrop {
     position: fixed;
     inset: 0;
@@ -13,16 +14,22 @@
     }
 }
 
+.modal,
 .al-modal {
     width: min(420px, calc(100vw - 24px));
-    border-radius: var(--al-radius-lg);
+    border: 1px solid #cfd8e3;
+    border-radius: 18px;
     background: var(--al-color-surface);
     overflow: hidden;
-    box-shadow: 0 20px 50px rgba(15, 23, 42, 0.18);
+    box-shadow: 0 20px 50px rgba(15, 23, 42, 0.14);
+    display: flex;
+    flex-direction: column;
+    max-height: calc(100vh - 32px);
 
     &__header {
-        padding: 16px 18px;
-        border-bottom: 1px solid #ebeff7;
+        margin: 0 24px;
+        padding: 24px 0 18px;
+        border-bottom: 2px solid #dbe5ef;
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -31,51 +38,58 @@
 
     &__title {
         margin: 0;
-        font-size: 16px;
-        font-weight: 700;
-        color: var(--al-color-text);
+        font-size: 30px;
+        font-weight: 800;
+        color: #071225;
+        letter-spacing: -0.04em;
     }
 
     &__close {
+        flex-shrink: 0;
+        width: 40px;
+        height: 40px;
         border: 0;
+        border-radius: 50%;
         background: transparent;
         cursor: pointer;
-        font-size: 20px;
+        font-size: 38px;
         line-height: 1;
-        padding: 4px;
-        color: var(--al-color-text-muted);
+        padding: 0;
+        color: #071225;
+        display: grid;
+        place-items: center;
 
         &:hover {
+            background: var(--al-color-surface-soft);
             color: var(--al-color-text);
         }
 
         &:focus-visible {
             outline: 2px solid var(--al-color-primary);
             outline-offset: 2px;
-            border-radius: 4px;
         }
     }
 
     &__body {
-        padding: 20px 18px;
+        padding: 34px 28px 22px;
         text-align: center;
         color: var(--al-color-text);
     }
 
     &__icon {
-        width: 66px;
-        height: 66px;
-        margin: 0 auto 12px;
-        border-radius: 18px;
-        background: #f3f7ff;
-        border: 1px solid #e6eefc;
+        width: 92px;
+        height: 92px;
+        margin: 0 auto 18px;
+        border-radius: 50%;
+        background: #f6f8fb;
+        border: 0;
         display: grid;
         place-items: center;
 
         &::before {
             content: '';
-            width: 34px;
-            height: 34px;
+            width: 54px;
+            height: 54px;
             background: center / contain no-repeat;
         }
     }
@@ -93,25 +107,150 @@
     }
 
     &__message {
-        margin: 10px 0 0;
-        font-size: 14px;
-        line-height: 1.5;
-        color: #1f2a44;
-        font-weight: 600;
-        letter-spacing: -0.1px;
+        margin: 0;
+        font-size: 26px;
+        line-height: 1.35;
+        color: #1e2a3a;
+        font-weight: 800;
+        letter-spacing: -0.04em;
     }
 
     &__submessage {
-        margin: 6px 0 0;
-        font-size: 12px;
-        line-height: 1.5;
-        color: #64748b;
+        margin: 14px 0 0;
+        font-size: 20px;
+        line-height: 1.35;
+        color: #52657a;
+        font-weight: 500;
+        letter-spacing: -0.04em;
+
+        strong {
+            color: var(--al-color-primary);
+            font-weight: 800;
+        }
     }
 
     &__footer {
         display: flex;
         justify-content: center;
+        gap: 12px;
+        padding: 0 24px 38px;
+
+        .btn,
+        .al-btn {
+            min-width: 118px;
+            height: 56px;
+            border-radius: var(--al-radius-pill);
+            font-size: 20px;
+            font-weight: 700;
+            letter-spacing: -0.04em;
+        }
+
+        .btn--tertiary,
+        .al-btn--tertiary {
+            border-color: #1e2a3a;
+            background: #fff;
+            color: #1e2a3a;
+        }
+    }
+
+    &--form {
+        width: min(860px, calc(100vw - 32px));
+        border-radius: 16px;
+
+        .modal__header,
+        .al-modal__header {
+            padding: 14px 28px;
+            border-bottom: 0;
+            background: var(--al-color-primary-light);
+        }
+
+        .modal__title,
+        .al-modal__title {
+            font-size: 20px;
+            font-weight: 800;
+            color: #fff;
+        }
+
+        .modal__close,
+        .al-modal__close {
+            background: rgba(255, 255, 255, 0.24);
+            color: #fff;
+
+            &:hover {
+                background: rgba(255, 255, 255, 0.34);
+                color: #fff;
+            }
+
+            &:focus-visible {
+                outline-color: #fff;
+            }
+        }
+
+        .modal__body,
+        .al-modal__body {
+            padding: 28px;
+            text-align: left;
+            overflow-y: auto;
+            background: #f7fbff;
+        }
+
+        .modal__footer,
+        .al-modal__footer {
+            justify-content: space-between;
+            gap: 16px;
+            padding: 18px 28px;
+            border-top: 1px solid #e7eef6;
+            background: rgba(255, 255, 255, 0.96);
+            box-shadow: 0 -8px 20px rgba(4, 7, 26, 0.06);
+        }
+    }
+
+    &__actions {
+        display: flex;
+        align-items: center;
         gap: 10px;
-        padding: 0 18px 18px;
+    }
+}
+
+.file-drop {
+    min-height: 150px;
+    border: 1px dashed #c9d3df;
+    border-radius: 12px;
+    background: #f8fafc;
+    display: grid;
+    place-items: center;
+    text-align: center;
+    color: var(--al-color-text-subtle);
+    cursor: pointer;
+
+    &__title {
+        margin: 0;
+        font-size: 15px;
+        font-weight: 500;
+        color: var(--al-color-text);
+        display: block;
+    }
+
+    &__meta {
+        display: block;
+        margin: 10px 0 0;
+        font-size: 13px;
+        color: var(--al-color-text-muted);
+    }
+
+    &__button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 78px;
+        height: 40px;
+        margin-top: 20px;
+        padding: 0 18px;
+        border: 1px solid var(--al-color-primary);
+        border-radius: 6px;
+        background: var(--al-color-surface);
+        color: var(--al-color-primary);
+        font-size: 15px;
+        font-weight: 600;
     }
 }

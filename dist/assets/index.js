@@ -35,7 +35,6 @@
     fetch(link.href, fetchOpts);
   }
 })();
-const APK_PATTERN = /\.apk$/i;
 const DEFAULT_MAX_BYTES = 500 * 1024 * 1024;
 function formatSize(size) {
   if (!Number.isFinite(size) || size < 0) return "0B";
@@ -76,10 +75,6 @@ function initFileUpload({ root, onValidFiles, maxBytes = DEFAULT_MAX_BYTES }) {
     const valids = [];
     const errors = [];
     for (const file of files) {
-      if (!APK_PATTERN.test(file.name)) {
-        errors.push(`${file.name} — 확장자는 APK(.apk)만 허용됩니다.`);
-        continue;
-      }
       if (file.size > maxBytes) {
         errors.push(`${file.name} — 파일당 최대 500MB까지 허용됩니다.`);
         continue;
@@ -104,9 +99,16 @@ function initFileUpload({ root, onValidFiles, maxBytes = DEFAULT_MAX_BYTES }) {
       input.value = "";
     }
   };
-  pickBtn == null ? void 0 : pickBtn.addEventListener("click", () => {
+  const openPicker = () => {
     showErrors([]);
     input == null ? void 0 : input.click();
+  };
+  pickBtn == null ? void 0 : pickBtn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    openPicker();
+  });
+  dropzone == null ? void 0 : dropzone.addEventListener("click", () => {
+    openPicker();
   });
   input == null ? void 0 : input.addEventListener("change", (e) => {
     const target = (
@@ -117,14 +119,17 @@ function initFileUpload({ root, onValidFiles, maxBytes = DEFAULT_MAX_BYTES }) {
   });
   dropzone == null ? void 0 : dropzone.addEventListener("dragover", (e) => {
     e.preventDefault();
+    dropzone.classList.add("file-upload__dropzone--active");
     dropzone.classList.add("al-file-upload__dropzone--active");
   });
   dropzone == null ? void 0 : dropzone.addEventListener("dragleave", () => {
+    dropzone.classList.remove("file-upload__dropzone--active");
     dropzone.classList.remove("al-file-upload__dropzone--active");
   });
   dropzone == null ? void 0 : dropzone.addEventListener("drop", (e) => {
     var _a;
     e.preventDefault();
+    dropzone.classList.remove("file-upload__dropzone--active");
     dropzone.classList.remove("al-file-upload__dropzone--active");
     handleFiles(((_a = e.dataTransfer) == null ? void 0 : _a.files) || []);
   });
@@ -135,31 +140,26 @@ function renderFileList(root, pageFiles, dispatch) {
   list.innerHTML = "";
   if (!pageFiles.length) {
     const empty = document.createElement("li");
-    empty.className = "al-file-upload__item al-file-upload__item--empty";
+    empty.className = "file-upload__item file-upload__item--empty al-file-upload__item al-file-upload__item--empty";
     empty.textContent = "파일이 없습니다.";
     list.appendChild(empty);
     return;
   }
   pageFiles.forEach(({ id, file }) => {
     const li = document.createElement("li");
-    li.className = "al-file-upload__item";
+    li.className = "file-upload__item al-file-upload__item";
     li.dataset.alFileId = id;
     const name = document.createElement("span");
-    name.className = "al-file-upload__name";
+    name.className = "file-upload__name al-file-upload__name";
     name.textContent = `${file.name} [${formatSize(file.size)}]`;
     const actions = document.createElement("div");
-    actions.className = "al-file-upload__item-actions";
+    actions.className = "file-upload__item-actions al-file-upload__item-actions";
     const dlBtn = document.createElement("button");
     dlBtn.type = "button";
-    dlBtn.className = "al-file-upload__btn";
+    dlBtn.className = "file-upload__btn al-file-upload__btn";
     dlBtn.dataset.action = "download";
     dlBtn.textContent = "다운로드";
-    const delBtn = document.createElement("button");
-    delBtn.type = "button";
-    delBtn.className = "al-file-upload__btn al-file-upload__btn--danger";
-    delBtn.dataset.action = "remove";
-    delBtn.textContent = "삭제";
-    actions.append(dlBtn, delBtn);
+    actions.append(dlBtn);
     li.append(name, actions);
     list.appendChild(li);
   });
@@ -249,10 +249,13 @@ function initTabs(root) {
       const isSel = tab === btn;
       tab.setAttribute("aria-selected", isSel ? "true" : "false");
       tab.tabIndex = isSel ? 0 : -1;
+      tab.classList.toggle("tabs__tab--active", isSel);
       tab.classList.toggle("al-tabs__tab--active", isSel);
       const panelId = tab.getAttribute("aria-controls");
-      const panel = panelId ? document.getElementById(panelId) : tabsRoot.querySelector(`[data-al-tabpanel="${CSS.escape(tabId)}"]`);
+      const currentTabId = tab.getAttribute("data-al-tab");
+      const panel = panelId ? document.getElementById(panelId) : currentTabId ? tabsRoot.querySelector(`[data-al-tabpanel="${CSS.escape(currentTabId)}"]`) : null;
       if (panel) {
+        panel.classList.toggle("tabs__panel--active", isSel);
         panel.classList.toggle("al-tabs__panel--active", isSel);
         if (isSel) panel.removeAttribute("hidden");
         else panel.setAttribute("hidden", "");
@@ -276,24 +279,16 @@ function initToggle(root) {
 }
 function buildPageItems(current, total) {
   if (total <= 1) return [1];
-  const delta = 2;
-  const range = [];
-  for (let i = 1; i <= total; i += 1) {
-    if (i === 1 || i === total || i >= current - delta && i <= current + delta) {
-      range.push(i);
-    }
+  if (total <= 9) {
+    return Array.from({ length: total }, (_, index) => index + 1);
   }
-  const out = [];
-  let l = 0;
-  for (const i of range) {
-    if (l) {
-      if (i - l === 2) out.push(l + 1);
-      else if (i - l !== 1) out.push("ellipsis");
-    }
-    out.push(i);
-    l = i;
+  if (current <= 5) {
+    return [1, 2, 3, 4, 5, 6, 7, 8, "ellipsis", total];
   }
-  return out;
+  if (current >= total - 4) {
+    return [1, "ellipsis", total - 7, total - 6, total - 5, total - 4, total - 3, total - 2, total - 1, total];
+  }
+  return [1, "ellipsis", current - 2, current - 1, current, current + 1, current + 2, "ellipsis", total];
 }
 function initPagination(root, getModel, onPageChange) {
   const nav = root.querySelector("[data-al-pagination]");
@@ -301,13 +296,19 @@ function initPagination(root, getModel, onPageChange) {
     return { render: () => {
     } };
   }
+  const demoTotal = Number(nav.getAttribute("data-al-pagination-total"));
+  const demoCurrent = Number(nav.getAttribute("data-al-pagination-current"));
+  const demoModel = Number.isFinite(demoTotal) && demoTotal > 0 ? {
+    currentPage: Number.isFinite(demoCurrent) && demoCurrent > 0 ? demoCurrent : 1,
+    totalPages: demoTotal
+  } : null;
   const pagesEl = nav.querySelector("[data-al-pagination-pages]");
   const firstBtn = nav.querySelector("[data-al-page-first]");
   const prevBtn = nav.querySelector("[data-al-page-prev]");
   const nextBtn = nav.querySelector("[data-al-page-next]");
   const lastBtn = nav.querySelector("[data-al-page-last]");
   const render = () => {
-    const { currentPage, totalPages } = getModel();
+    const { currentPage, totalPages } = demoModel || getModel();
     if (firstBtn) firstBtn.disabled = currentPage <= 1 || totalPages <= 1;
     if (prevBtn) prevBtn.disabled = currentPage <= 1 || totalPages <= 1;
     if (nextBtn) nextBtn.disabled = currentPage >= totalPages || totalPages <= 1;
@@ -320,7 +321,7 @@ function initPagination(root, getModel, onPageChange) {
         const span = document.createElement("span");
         span.className = "al-pagination__ellipsis";
         span.setAttribute("aria-hidden", "true");
-        span.textContent = "···";
+        span.textContent = "…";
         pagesEl.appendChild(span);
         return;
       }
@@ -341,28 +342,36 @@ function initPagination(root, getModel, onPageChange) {
       /** @type {HTMLElement} */
       e.target
     );
-    const { currentPage, totalPages } = getModel();
+    const { currentPage, totalPages } = demoModel || getModel();
+    const setPage = (page) => {
+      if (demoModel) {
+        demoModel.currentPage = Math.min(Math.max(1, page), demoModel.totalPages);
+        render();
+        return;
+      }
+      onPageChange(page);
+    };
     const pageBtn = target.closest("[data-al-page-num]");
     if (pageBtn) {
       const page = Number(pageBtn.getAttribute("data-al-page-num"));
       if (!Number.isFinite(page)) return;
-      onPageChange(page);
+      setPage(page);
       return;
     }
     if (target.closest("[data-al-page-first]")) {
-      onPageChange(1);
+      setPage(1);
       return;
     }
     if (target.closest("[data-al-page-prev]")) {
-      onPageChange(Math.max(1, currentPage - 1));
+      setPage(Math.max(1, currentPage - 1));
       return;
     }
     if (target.closest("[data-al-page-next]")) {
-      onPageChange(Math.min(totalPages, currentPage + 1));
+      setPage(Math.min(totalPages, currentPage + 1));
       return;
     }
     if (target.closest("[data-al-page-last]")) {
-      onPageChange(totalPages);
+      setPage(totalPages);
     }
   });
   return { render };
@@ -424,6 +433,222 @@ function initSidenav() {
   initNavAccordion();
   initDrawer();
 }
+class CustomSelect {
+  constructor(selectElement) {
+    this.select = selectElement;
+    this.options = Array.from(this.select.options);
+    this.selectedIndex = this.select.selectedIndex;
+    this.isOpen = false;
+    this.activeIndex = Math.max(0, this.selectedIndex);
+    this.typeBuffer = "";
+    this.typeTimer = null;
+    this.init();
+  }
+  init() {
+    this.boundKeydown = this.onKeydown.bind(this);
+    if (this.select.dataset.customSelectReady === "true") return;
+    this.select.dataset.customSelectReady = "true";
+    this.select.style.display = "none";
+    this.createCustomSelect();
+    this.setupEvents();
+  }
+  createCustomSelect() {
+    var _a;
+    const wrapper = document.createElement("div");
+    wrapper.className = "custom-select";
+    wrapper.dataset.customSelect = "true";
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "custom-select__button";
+    button.textContent = ((_a = this.select.options[this.select.selectedIndex]) == null ? void 0 : _a.text) || "";
+    button.setAttribute("aria-haspopup", "listbox");
+    button.setAttribute("aria-expanded", "false");
+    const dropdown = document.createElement("div");
+    dropdown.className = "custom-select__dropdown";
+    dropdown.setAttribute("role", "listbox");
+    dropdown.setAttribute("tabindex", "-1");
+    this.options.forEach((option, index) => {
+      const item = document.createElement("div");
+      item.className = "custom-select__option";
+      item.setAttribute("role", "option");
+      item.id = `cs-opt-${Math.random().toString(16).slice(2)}-${index}`;
+      if (index === this.selectedIndex) {
+        item.classList.add("is-selected");
+        item.setAttribute("aria-selected", "true");
+      }
+      item.textContent = option.text;
+      item.dataset.value = option.value;
+      item.dataset.index = index;
+      item.addEventListener("click", () => {
+        this.selectOption(index);
+      });
+      dropdown.appendChild(item);
+    });
+    this.select.parentNode.insertBefore(wrapper, this.select);
+    wrapper.appendChild(button);
+    wrapper.appendChild(dropdown);
+    wrapper.appendChild(this.select);
+    this.wrapper = wrapper;
+    this.button = button;
+    this.dropdown = dropdown;
+    this.setActiveIndex(this.activeIndex, { scroll: false });
+  }
+  setupEvents() {
+    this.button.addEventListener("click", (e) => {
+      e.stopPropagation();
+      this.toggle();
+    });
+    this.button.addEventListener("keydown", this.boundKeydown);
+    document.addEventListener("click", (e) => {
+      if (!this.wrapper.contains(e.target)) {
+        this.close();
+      }
+    });
+    document.addEventListener("custom-select:open", (e) => {
+      var _a;
+      if (((_a = e.detail) == null ? void 0 : _a.id) !== this.wrapper.dataset.csId) this.close();
+    });
+    this.select.addEventListener("change", () => {
+      this.updateButton();
+    });
+    if (!this.wrapper.dataset.csId) {
+      this.wrapper.dataset.csId = `cs-${Math.random().toString(16).slice(2)}`;
+    }
+  }
+  toggle() {
+    this.isOpen = !this.isOpen;
+    this.wrapper.classList.toggle("is-open", this.isOpen);
+    this.button.setAttribute("aria-expanded", this.isOpen ? "true" : "false");
+    if (this.isOpen) {
+      document.dispatchEvent(new CustomEvent("custom-select:open", { detail: { id: this.wrapper.dataset.csId } }));
+      this.setDropDirection();
+      this.setActiveIndex(this.select.selectedIndex, { scroll: true });
+    } else {
+      this.wrapper.classList.remove("is-up");
+    }
+  }
+  open() {
+    if (this.isOpen) return;
+    this.isOpen = true;
+    this.wrapper.classList.add("is-open");
+    this.button.setAttribute("aria-expanded", "true");
+    document.dispatchEvent(new CustomEvent("custom-select:open", { detail: { id: this.wrapper.dataset.csId } }));
+    this.setDropDirection();
+    this.setActiveIndex(this.select.selectedIndex, { scroll: true });
+  }
+  onKeydown(e) {
+    const key = e.key;
+    if (key === "ArrowDown") {
+      e.preventDefault();
+      if (!this.isOpen) this.open();
+      this.setActiveIndex(Math.min(this.options.length - 1, this.activeIndex + 1), { scroll: true });
+      return;
+    }
+    if (key === "ArrowUp") {
+      e.preventDefault();
+      if (!this.isOpen) this.open();
+      this.setActiveIndex(Math.max(0, this.activeIndex - 1), { scroll: true });
+      return;
+    }
+    if (key === "Home") {
+      e.preventDefault();
+      if (!this.isOpen) this.open();
+      this.setActiveIndex(0, { scroll: true });
+      return;
+    }
+    if (key === "End") {
+      e.preventDefault();
+      if (!this.isOpen) this.open();
+      this.setActiveIndex(this.options.length - 1, { scroll: true });
+      return;
+    }
+    if (key === "Enter" || key === " ") {
+      e.preventDefault();
+      if (!this.isOpen) {
+        this.open();
+        return;
+      }
+      this.selectOption(this.activeIndex);
+      return;
+    }
+    if (key === "Escape") {
+      e.preventDefault();
+      this.close();
+      return;
+    }
+    if (key.length === 1 && !e.ctrlKey && !e.metaKey && !e.altKey) {
+      this.typeBuffer += key.toLowerCase();
+      clearTimeout(this.typeTimer);
+      this.typeTimer = setTimeout(() => this.typeBuffer = "", 450);
+      const idx = this.options.findIndex((o) => o.text.toLowerCase().startsWith(this.typeBuffer));
+      if (idx >= 0) {
+        if (!this.isOpen) this.open();
+        this.setActiveIndex(idx, { scroll: true });
+      }
+    }
+  }
+  setActiveIndex(index, { scroll }) {
+    this.activeIndex = Math.max(0, Math.min(this.options.length - 1, index));
+    const items = [...this.dropdown.querySelectorAll(".custom-select__option")];
+    items.forEach((el, i) => {
+      el.classList.toggle("is-active", i === this.activeIndex);
+    });
+    const active = items[this.activeIndex];
+    if (active == null ? void 0 : active.id) {
+      this.button.setAttribute("aria-activedescendant", active.id);
+    }
+    if (scroll && active) {
+      const rect = active.getBoundingClientRect();
+      const dRect = this.dropdown.getBoundingClientRect();
+      if (rect.top < dRect.top) active.scrollIntoView({ block: "nearest" });
+      if (rect.bottom > dRect.bottom) active.scrollIntoView({ block: "nearest" });
+    }
+  }
+  setDropDirection() {
+    const rect = this.button.getBoundingClientRect();
+    const gap = 6;
+    const spaceBelow = window.innerHeight - rect.bottom - gap;
+    const spaceAbove = rect.top - gap;
+    this.wrapper.classList.toggle("is-up", spaceBelow < 180 && spaceAbove > spaceBelow);
+  }
+  close() {
+    this.isOpen = false;
+    this.wrapper.classList.remove("is-open");
+    this.wrapper.classList.remove("is-up");
+    this.button.setAttribute("aria-expanded", "false");
+  }
+  selectOption(index) {
+    this.select.selectedIndex = index;
+    this.selectedIndex = index;
+    const event = new Event("change", { bubbles: true });
+    this.select.dispatchEvent(event);
+    this.updateButton();
+    this.updateOptions();
+    this.close();
+  }
+  updateButton() {
+    var _a;
+    this.button.textContent = ((_a = this.select.options[this.select.selectedIndex]) == null ? void 0 : _a.text) || "";
+  }
+  updateOptions() {
+    this.dropdown.querySelectorAll(".custom-select__option").forEach((item, index) => {
+      if (index === this.select.selectedIndex) {
+        item.classList.add("is-selected");
+        item.setAttribute("aria-selected", "true");
+      } else {
+        item.classList.remove("is-selected");
+        item.setAttribute("aria-selected", "false");
+      }
+    });
+    this.setActiveIndex(this.select.selectedIndex, { scroll: false });
+  }
+}
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll("select.form__select, select[data-custom-select], select.js-custom-select").forEach((select) => {
+    if (select.closest(".custom-select")) return;
+    new CustomSelect(select);
+  });
+});
 function initGuidePage() {
   const root = document.getElementById("alContent");
   if (!root) return;
@@ -496,6 +721,7 @@ function initGuidePage() {
   initModals();
   initTabs(root);
   initToggle(root);
+  initDatePop(root);
   const searchBtn = root.querySelector("[data-al-guide-search]");
   const kw = root.querySelector("[data-al-guide-kw]");
   const runSearch = () => applyFilter();
@@ -504,6 +730,83 @@ function initGuidePage() {
     if (e.key === "Enter") runSearch();
   });
   applyFilter();
+}
+function initDatePop(root) {
+  const closeAll = () => {
+    root.querySelectorAll("[data-date-pop]").forEach((pop) => {
+      if (pop instanceof HTMLElement) pop.hidden = true;
+    });
+  };
+  const getDateValue = (button) => {
+    var _a;
+    const days = button.closest(".date-pop__days");
+    if (!days) return "";
+    const buttons = [...days.querySelectorAll("button")];
+    const index = buttons.indexOf(button);
+    const day = ((_a = button.textContent) == null ? void 0 : _a.trim().padStart(2, "0")) || "";
+    if (index < 2) return `2026-03-${day}`;
+    if (index > 31) return `2026-05-${day}`;
+    return `2026-04-${day}`;
+  };
+  const paintSelectedDays = (field) => {
+    const start = field.dataset.dateStart;
+    const end = field.dataset.dateEnd;
+    field.querySelectorAll(".date-pop__days button").forEach((button) => {
+      if (!(button instanceof HTMLButtonElement)) return;
+      const value = getDateValue(button);
+      button.classList.toggle("is-selected", value === start || value === end);
+      button.classList.toggle("is-range", Boolean(start && end && value > start && value < end));
+    });
+  };
+  root.addEventListener("click", (e) => {
+    const target = (
+      /** @type {HTMLElement} */
+      e.target
+    );
+    const field = target.closest(".form__field--date");
+    const pop = field == null ? void 0 : field.querySelector("[data-date-pop]");
+    const dayButton = target.closest(".date-pop__days button");
+    if (dayButton && field instanceof HTMLElement && dayButton instanceof HTMLButtonElement) {
+      const input = field.querySelector(".form__input");
+      const value = getDateValue(dayButton);
+      if (!field.dataset.dateStart || field.dataset.dateEnd) {
+        field.dataset.dateStart = value;
+        field.dataset.dateEnd = "";
+        if (input instanceof HTMLInputElement) input.value = `${value} ~ `;
+      } else {
+        const start = field.dataset.dateStart;
+        const sorted = [start, value].sort();
+        field.dataset.dateStart = sorted[0];
+        field.dataset.dateEnd = sorted[1];
+        if (input instanceof HTMLInputElement) input.value = `${sorted[0]} ~ ${sorted[1]}`;
+        if (pop instanceof HTMLElement) pop.hidden = true;
+      }
+      paintSelectedDays(field);
+      return;
+    }
+    if (field instanceof HTMLElement && !target.closest("[data-date-pop]")) {
+      const isOpen = pop instanceof HTMLElement && !pop.hidden;
+      closeAll();
+      if (pop instanceof HTMLElement) {
+        pop.hidden = isOpen && target.closest("[data-date-toggle]") ? true : false;
+        paintSelectedDays(field);
+      }
+    }
+  });
+  document.addEventListener("click", (e) => {
+    const target = (
+      /** @type {HTMLElement} */
+      e.target
+    );
+    if (root.contains(target) && target.closest(".form__field--date")) return;
+    closeAll();
+  });
+  root.querySelectorAll(".form__field--date").forEach((field) => {
+    if (!(field instanceof HTMLElement)) return;
+    field.dataset.dateStart = "2026-03-31";
+    field.dataset.dateEnd = "2026-04-07";
+    paintSelectedDays(field);
+  });
 }
 document.addEventListener("DOMContentLoaded", () => {
   initSidenav();

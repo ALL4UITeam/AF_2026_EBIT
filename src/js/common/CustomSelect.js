@@ -8,12 +8,18 @@ class CustomSelect {
     this.options = Array.from(this.select.options);
     this.selectedIndex = this.select.selectedIndex;
     this.isOpen = false;
+    this.activeIndex = Math.max(0, this.selectedIndex);
+    this.typeBuffer = '';
+    this.typeTimer = null;
     
     this.init();
   }
   
   init() {
-    this.boundPositionDropdown = this.positionDropdown.bind(this);
+    this.boundKeydown = this.onKeydown.bind(this);
+    if (this.select.dataset.customSelectReady === 'true') return;
+    this.select.dataset.customSelectReady = 'true';
+
     // 원본 select 숨기기
     this.select.style.display = 'none';
     
@@ -27,38 +33,32 @@ class CustomSelect {
   createCustomSelect() {
     const wrapper = document.createElement('div');
     wrapper.className = 'custom-select';
+    wrapper.dataset.customSelect = 'true';
     
     const button = document.createElement('button');
     button.type = 'button';
     button.className = 'custom-select__button';
     button.textContent = this.select.options[this.select.selectedIndex]?.text || '';
+    button.setAttribute('aria-haspopup', 'listbox');
+    button.setAttribute('aria-expanded', 'false');
     
     const dropdown = document.createElement('div');
     dropdown.className = 'custom-select__dropdown';
+    dropdown.setAttribute('role', 'listbox');
+    dropdown.setAttribute('tabindex', '-1');
     
     this.options.forEach((option, index) => {
       const item = document.createElement('div');
       item.className = 'custom-select__option';
+      item.setAttribute('role', 'option');
+      item.id = `cs-opt-${Math.random().toString(16).slice(2)}-${index}`;
       if (index === this.selectedIndex) {
         item.classList.add('is-selected');
+        item.setAttribute('aria-selected', 'true');
       }
       item.textContent = option.text;
       item.dataset.value = option.value;
       item.dataset.index = index;
-      
-      item.addEventListener('mouseenter', () => {
-        // 호버 시 선택 효과
-        this.dropdown.querySelectorAll('.custom-select__option').forEach(opt => {
-          if (opt !== item && !opt.classList.contains('is-selected')) {
-            opt.style.background = '#fff';
-            opt.style.color = '#333';
-          }
-        });
-        if (!item.classList.contains('is-selected')) {
-          item.style.background = '#2196F3';
-          item.style.color = '#fff';
-        }
-      });
       
       item.addEventListener('click', () => {
         this.selectOption(index);
@@ -67,13 +67,16 @@ class CustomSelect {
       dropdown.appendChild(item);
     });
     
+    this.select.parentNode.insertBefore(wrapper, this.select);
     wrapper.appendChild(button);
     wrapper.appendChild(dropdown);
-    
-    this.select.parentNode.insertBefore(wrapper, this.select);
+    wrapper.appendChild(this.select);
+
     this.wrapper = wrapper;
     this.button = button;
     this.dropdown = dropdown;
+
+    this.setActiveIndex(this.activeIndex, { scroll: false });
   }
   
   setupEvents() {
@@ -82,6 +85,9 @@ class CustomSelect {
       e.stopPropagation();
       this.toggle();
     });
+
+    // 키보드 조작
+    this.button.addEventListener('keydown', this.boundKeydown);
     
     // 외부 클릭 시 닫기
     document.addEventListener('click', (e) => {
@@ -89,57 +95,139 @@ class CustomSelect {
         this.close();
       }
     });
+
+    // 다른 셀렉트가 열릴 때 자동 닫기
+    document.addEventListener('custom-select:open', (e) => {
+      if (e.detail?.id !== this.wrapper.dataset.csId) this.close();
+    });
     
     // 원본 select 변경 감지
     this.select.addEventListener('change', () => {
       this.updateButton();
     });
+
+    if (!this.wrapper.dataset.csId) {
+      this.wrapper.dataset.csId = `cs-${Math.random().toString(16).slice(2)}`;
+    }
   }
   
   toggle() {
     this.isOpen = !this.isOpen;
     this.wrapper.classList.toggle('is-open', this.isOpen);
+    this.button.setAttribute('aria-expanded', this.isOpen ? 'true' : 'false');
     if (this.isOpen) {
-      this.positionDropdown();
-      window.addEventListener('scroll', this.boundPositionDropdown, true);
-      window.addEventListener('resize', this.boundPositionDropdown);
+      document.dispatchEvent(new CustomEvent('custom-select:open', { detail: { id: this.wrapper.dataset.csId } }));
+      this.setDropDirection();
+      this.setActiveIndex(this.select.selectedIndex, { scroll: true });
     } else {
-      this.clearDropdownPosition();
-      window.removeEventListener('scroll', this.boundPositionDropdown, true);
-      window.removeEventListener('resize', this.boundPositionDropdown);
+      this.wrapper.classList.remove('is-up');
     }
   }
 
-  positionDropdown() {
-    const rect = this.button.getBoundingClientRect();
-    const d = this.dropdown;
-    d.style.position = 'fixed';
-    d.style.top = `${rect.bottom + 4}px`;
-    d.style.left = `${rect.left}px`;
-    d.style.width = `${rect.width}px`;
-    d.style.minWidth = `${rect.width}px`;
-    d.style.zIndex = '9999';
+  open() {
+    if (this.isOpen) return;
+    this.isOpen = true;
+    this.wrapper.classList.add('is-open');
+    this.button.setAttribute('aria-expanded', 'true');
+    document.dispatchEvent(new CustomEvent('custom-select:open', { detail: { id: this.wrapper.dataset.csId } }));
+    this.setDropDirection();
+    this.setActiveIndex(this.select.selectedIndex, { scroll: true });
   }
 
-  clearDropdownPosition() {
-    const d = this.dropdown;
-    d.style.position = '';
-    d.style.top = '';
-    d.style.left = '';
-    d.style.width = '';
-    d.style.minWidth = '';
-    d.style.zIndex = '';
+  onKeydown(e) {
+    const key = e.key;
+
+    if (key === 'ArrowDown') {
+      e.preventDefault();
+      if (!this.isOpen) this.open();
+      this.setActiveIndex(Math.min(this.options.length - 1, this.activeIndex + 1), { scroll: true });
+      return;
+    }
+
+    if (key === 'ArrowUp') {
+      e.preventDefault();
+      if (!this.isOpen) this.open();
+      this.setActiveIndex(Math.max(0, this.activeIndex - 1), { scroll: true });
+      return;
+    }
+
+    if (key === 'Home') {
+      e.preventDefault();
+      if (!this.isOpen) this.open();
+      this.setActiveIndex(0, { scroll: true });
+      return;
+    }
+
+    if (key === 'End') {
+      e.preventDefault();
+      if (!this.isOpen) this.open();
+      this.setActiveIndex(this.options.length - 1, { scroll: true });
+      return;
+    }
+
+    if (key === 'Enter' || key === ' ') {
+      e.preventDefault();
+      if (!this.isOpen) {
+        this.open();
+        return;
+      }
+      this.selectOption(this.activeIndex);
+      return;
+    }
+
+    if (key === 'Escape') {
+      e.preventDefault();
+      this.close();
+      return;
+    }
+
+    // typeahead (간단)
+    if (key.length === 1 && !e.ctrlKey && !e.metaKey && !e.altKey) {
+      this.typeBuffer += key.toLowerCase();
+      clearTimeout(this.typeTimer);
+      this.typeTimer = setTimeout(() => (this.typeBuffer = ''), 450);
+
+      const idx = this.options.findIndex((o) => o.text.toLowerCase().startsWith(this.typeBuffer));
+      if (idx >= 0) {
+        if (!this.isOpen) this.open();
+        this.setActiveIndex(idx, { scroll: true });
+      }
+    }
+  }
+
+  setActiveIndex(index, { scroll }) {
+    this.activeIndex = Math.max(0, Math.min(this.options.length - 1, index));
+    const items = [...this.dropdown.querySelectorAll('.custom-select__option')];
+    items.forEach((el, i) => {
+      el.classList.toggle('is-active', i === this.activeIndex);
+    });
+
+    const active = items[this.activeIndex];
+    if (active?.id) {
+      this.button.setAttribute('aria-activedescendant', active.id);
+    }
+
+    if (scroll && active) {
+      const rect = active.getBoundingClientRect();
+      const dRect = this.dropdown.getBoundingClientRect();
+      if (rect.top < dRect.top) active.scrollIntoView({ block: 'nearest' });
+      if (rect.bottom > dRect.bottom) active.scrollIntoView({ block: 'nearest' });
+    }
+  }
+
+  setDropDirection() {
+    const rect = this.button.getBoundingClientRect();
+    const gap = 6;
+    const spaceBelow = window.innerHeight - rect.bottom - gap;
+    const spaceAbove = rect.top - gap;
+    this.wrapper.classList.toggle('is-up', spaceBelow < 180 && spaceAbove > spaceBelow);
   }
 
   close() {
     this.isOpen = false;
     this.wrapper.classList.remove('is-open');
-    if (this.dropdown.parentNode === document.body) {
-      this.wrapper.appendChild(this.dropdown);
-    }
-    this.clearDropdownPosition();
-    window.removeEventListener('scroll', this.boundPositionDropdown, true);
-    window.removeEventListener('resize', this.boundPositionDropdown);
+    this.wrapper.classList.remove('is-up');
+    this.button.setAttribute('aria-expanded', 'false');
   }
   
   selectOption(index) {
@@ -163,10 +251,13 @@ class CustomSelect {
     this.dropdown.querySelectorAll('.custom-select__option').forEach((item, index) => {
       if (index === this.select.selectedIndex) {
         item.classList.add('is-selected');
+        item.setAttribute('aria-selected', 'true');
       } else {
         item.classList.remove('is-selected');
+        item.setAttribute('aria-selected', 'false');
       }
     });
+    this.setActiveIndex(this.select.selectedIndex, { scroll: false });
   }
 }
 
@@ -174,7 +265,7 @@ class CustomSelect {
 // 커스텀으로 바꾸고 싶은 select만 지정해서 변환합니다.
 // 사용법: <select data-custom-select> 또는 <select class="js-custom-select">
 document.addEventListener('DOMContentLoaded', () => {
-  document.querySelectorAll('select[data-custom-select], select.js-custom-select').forEach(select => {
+  document.querySelectorAll('select.form__select, select[data-custom-select], select.js-custom-select').forEach(select => {
     if (select.closest('.custom-select')) return;
     new CustomSelect(select);
   });

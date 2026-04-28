@@ -4,35 +4,42 @@
 // ============================================================
 :root {
     // Brand / semantic
-    --al-color-primary: #4f46e5;
-    --al-color-primary-dark: #3730a3;
-    --al-color-secondary: #8b5cf6;
-    --al-color-text: #1f2a44;
-    --al-color-text-muted: #64748b;
-    --al-color-border: #d8dced;
+    --al-color-primary: #047BB6;
+    --al-color-primary-dark: #052031;
+    --al-color-primary-light: #57a1ea;
+    --al-color-secondary: #8fad57;
+    --al-color-secondary-dark: #263017;
+    --al-color-accent: #e90081;
+    --al-color-accent-dark: #410026;
+    --al-color-text: #04071a;
+    --al-color-text-subtle: #354253;
+    --al-color-text-muted: #66758a;
+    --al-color-border: #cdd6df;
     --al-color-surface: #ffffff;
-    --al-color-bg: #f6f8fc;
-    --al-color-surface-soft: #f9fbff;
-    --al-color-surface-tint: #eff3ff;
-    --al-color-tertiary-bg: #eef1ff;
-    --al-color-tertiary-text: #3f46a6;
+    --al-color-bg: #f9fafc;
+    --al-color-surface-soft: #f0f4f8;
+    --al-color-surface-tint: #F0F7FF;
+    --al-color-tertiary-bg: #dceefc;
+    --al-color-tertiary-text: #125276;
 
     // Choice (radio/checkbox)
-    --al-color-choice: #6366f1;
-    --al-color-choice-border: #94a3b8;
-    --al-color-choice-disabled-bg: #f1f5f9;
+    --al-color-choice: #047BB6;
+    --al-color-choice-border: #94A3B8;
+    --al-color-choice-disabled-bg: #f0f4f8;
 
     // Pagination active (기존 가이드 톤 유지)
-    --al-color-pagination-active-bg: #1e1b4b;
+    --al-color-pagination-active-bg: #052031;
     --al-color-pagination-active-fg: #ffffff;
 
     // Danger / success (뱃지·향후 확장)
-    --al-color-danger-bg: #ffe5e5;
-    --al-color-danger-text: #b42020;
+    --al-color-success-bg: #eff4e0;
+    --al-color-success-text: #667941;
+    --al-color-danger-bg: #fce1e8;
+    --al-color-danger-text: #99055d;
     --al-color-warn-bg: #fff4d9;
     --al-color-warn-text: #9c6a00;
-    --al-color-info-bg: #ebefff;
-    --al-color-info-text: #3242aa;
+    --al-color-info-bg: #dceefc;
+    --al-color-info-text: #125276;
 
     // Radius
     --al-radius-sm: 8px;

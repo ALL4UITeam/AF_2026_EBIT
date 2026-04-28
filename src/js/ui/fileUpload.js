@@ -1,4 +1,3 @@
-const APK_PATTERN = /\.apk$/i;
 const DEFAULT_MAX_BYTES = 500 * 1024 * 1024;
 
 function formatSize(size) {
@@ -57,10 +56,6 @@ export function initFileUpload({ root, onValidFiles, maxBytes = DEFAULT_MAX_BYTE
         const errors = [];
 
         for (const file of files) {
-            if (!APK_PATTERN.test(file.name)) {
-                errors.push(`${file.name} — 확장자는 APK(.apk)만 허용됩니다.`);
-                continue;
-            }
             if (file.size > maxBytes) {
                 errors.push(`${file.name} — 파일당 최대 500MB까지 허용됩니다.`);
                 continue;
@@ -91,9 +86,18 @@ export function initFileUpload({ root, onValidFiles, maxBytes = DEFAULT_MAX_BYTE
         }
     };
 
-    pickBtn?.addEventListener('click', () => {
+    const openPicker = () => {
         showErrors([]);
         input?.click();
+    };
+
+    pickBtn?.addEventListener('click', (e) => {
+        e.stopPropagation();
+        openPicker();
+    });
+
+    dropzone?.addEventListener('click', () => {
+        openPicker();
     });
 
     input?.addEventListener('change', (e) => {
@@ -103,15 +107,18 @@ export function initFileUpload({ root, onValidFiles, maxBytes = DEFAULT_MAX_BYTE
 
     dropzone?.addEventListener('dragover', (e) => {
         e.preventDefault();
+        dropzone.classList.add('file-upload__dropzone--active');
         dropzone.classList.add('al-file-upload__dropzone--active');
     });
 
     dropzone?.addEventListener('dragleave', () => {
+        dropzone.classList.remove('file-upload__dropzone--active');
         dropzone.classList.remove('al-file-upload__dropzone--active');
     });
 
     dropzone?.addEventListener('drop', (e) => {
         e.preventDefault();
+        dropzone.classList.remove('file-upload__dropzone--active');
         dropzone.classList.remove('al-file-upload__dropzone--active');
         handleFiles(e.dataTransfer?.files || []);
     });
@@ -130,7 +137,7 @@ export function renderFileList(root, pageFiles, dispatch) {
 
     if (!pageFiles.length) {
         const empty = document.createElement('li');
-        empty.className = 'al-file-upload__item al-file-upload__item--empty';
+        empty.className = 'file-upload__item file-upload__item--empty al-file-upload__item al-file-upload__item--empty';
         empty.textContent = '파일이 없습니다.';
         list.appendChild(empty);
         return;
@@ -138,29 +145,23 @@ export function renderFileList(root, pageFiles, dispatch) {
 
     pageFiles.forEach(({ id, file }) => {
         const li = document.createElement('li');
-        li.className = 'al-file-upload__item';
+        li.className = 'file-upload__item al-file-upload__item';
         li.dataset.alFileId = id;
 
         const name = document.createElement('span');
-        name.className = 'al-file-upload__name';
+        name.className = 'file-upload__name al-file-upload__name';
         name.textContent = `${file.name} [${formatSize(file.size)}]`;
 
         const actions = document.createElement('div');
-        actions.className = 'al-file-upload__item-actions';
+        actions.className = 'file-upload__item-actions al-file-upload__item-actions';
 
         const dlBtn = document.createElement('button');
         dlBtn.type = 'button';
-        dlBtn.className = 'al-file-upload__btn';
+        dlBtn.className = 'file-upload__btn al-file-upload__btn';
         dlBtn.dataset.action = 'download';
         dlBtn.textContent = '다운로드';
 
-        const delBtn = document.createElement('button');
-        delBtn.type = 'button';
-        delBtn.className = 'al-file-upload__btn al-file-upload__btn--danger';
-        delBtn.dataset.action = 'remove';
-        delBtn.textContent = '삭제';
-
-        actions.append(dlBtn, delBtn);
+        actions.append(dlBtn);
         li.append(name, actions);
         list.appendChild(li);
     });

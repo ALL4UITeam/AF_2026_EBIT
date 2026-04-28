@@ -32,7 +32,7 @@ export default defineConfig(() => {
 
   return {
     root: "src",
-    base: '/AF_2026_EBIT/',
+    base: '/2026_AF_EBIT/',
     publicDir: "../public",
 
     build: {

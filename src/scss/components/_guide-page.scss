@@ -20,12 +20,12 @@
     background: var(--al-color-surface);
     border: 1px solid var(--al-color-border);
     border-radius: var(--al-radius-lg);
-    padding: 20px;
+    padding: 32px;
     margin-bottom: 14px;
 
     &__title {
-        margin: 0 0 12px;
-        font-size: 18px;
+        margin: 0 0 21px;
+        font-size: 21px;
         color: var(--al-color-text);
     }
 }
@@ -35,7 +35,11 @@
     gap: 10px;
 
     &--colors {
-        grid-template-columns: repeat(3, minmax(140px, 1fr));
+        grid-template-columns: repeat(5, minmax(140px, 1fr));
+
+        @media (max-width: 1200px) {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
     }
 }
 
@@ -44,18 +48,54 @@
     color: #fff;
     padding: 18px;
     font-weight: 700;
+    min-height: 92px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 12px;
 
-    &--primary {
-        background: linear-gradient(90deg, #4f46e5, #312e81);
+    span {
+        font-size: 12px;
+        font-weight: 600;
+        color: rgba(255, 255, 255, 0.78);
     }
 
-    &--secondary {
-        background: linear-gradient(90deg, #a78bfa, #4c1d95);
+    &--navy {
+        background: linear-gradient(90deg, #66758a, #354253, #052031);
+    }
+
+    &--blue {
+        background: linear-gradient(90deg, #dceefc, #57a1ea, #1276a7, #052031);
+    }
+
+    &--green {
+        background: linear-gradient(90deg, #eff4e0, #b3c77f, #8fad57, #263017);
+    }
+
+    &--pink {
+        background: linear-gradient(90deg, #fce1e8, #f64a84, #e90081, #410026);
     }
 
     &--gray {
-        background: linear-gradient(90deg, #cbd5e1, #334155);
+        background: linear-gradient(90deg, #f9fafc, #cdd6df, #66758a, #04071a);
     }
+}
+
+.al-guide-card-preview {
+    display: grid;
+    grid-template-columns: minmax(260px, 420px);
+
+    .card {
+        margin-bottom: 0;
+    }
+}
+
+.guide-preview {
+    max-width: 820px;
+    padding: 28px;
+    border-radius: 16px;
+    background: #f7fbff;
+    border: 1px solid #e1edf8;
 }
 
 .al-guide-row {
@@ -76,29 +116,6 @@
 .al-guide-col {
     display: grid;
     gap: 10px;
-}
-
-.al-badge {
-    display: inline-block;
-    border-radius: var(--al-radius-pill);
-    padding: 6px 10px;
-    font-size: 12px;
-    font-weight: 700;
-
-    &--info {
-        background: var(--al-color-info-bg);
-        color: var(--al-color-info-text);
-    }
-
-    &--warn {
-        background: var(--al-color-warn-bg);
-        color: var(--al-color-warn-text);
-    }
-
-    &--danger {
-        background: var(--al-color-danger-bg);
-        color: var(--al-color-danger-text);
-    }
 }
 
 .al-guide-total {

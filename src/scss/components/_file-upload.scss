@@ -1,10 +1,11 @@
+.file-upload,
 .al-file-upload {
     &__dropzone {
-        border: 1px dashed #b9c3e3;
+        border: 1px dashed #c9d3df;
         border-radius: 12px;
         text-align: center;
-        padding: 22px;
-        background: var(--al-color-surface-soft);
+        padding: 28px 24px 22px;
+        background: #f8fafc;
         transition: border-color 0.2s ease, background 0.2s ease;
 
         &--active {
@@ -16,12 +17,14 @@
     &__hint {
         margin: 0;
         color: var(--al-color-text);
+        font-size: 16px;
+        font-weight: 500;
     }
 
     &__meta {
-        margin-top: 6px;
-        color: #6f7b9a;
-        font-size: 12px;
+        margin: 10px 0 0;
+        color: #4f5f72;
+        font-size: 14px;
     }
 
     &__input {
@@ -37,7 +40,7 @@
     }
 
     &__actions {
-        margin-top: 10px;
+        margin-top: 20px;
     }
 
     &__message {
@@ -82,20 +85,21 @@
 
     &__list {
         list-style: none;
-        margin: 10px 0 0;
+        margin: 28px 0 0;
         padding: 0;
         display: grid;
-        gap: 8px;
+        gap: 10px;
     }
 
     &__item {
-        border: 1px solid var(--al-color-border);
-        border-radius: var(--al-radius-md);
-        padding: 10px 12px;
+        min-height: 56px;
+        border: 1px solid #d8e0ea;
+        border-radius: 8px;
+        padding: 0 22px;
         display: flex;
         justify-content: space-between;
         align-items: center;
-        gap: 8px;
+        gap: 16px;
         background: var(--al-color-surface);
 
         &--empty {
@@ -107,7 +111,9 @@
 
     &__name {
         word-break: break-all;
-        font-size: 14px;
+        font-size: 18px;
+        font-weight: 500;
+        color: #263445;
     }
 
     &__item-actions {
@@ -117,17 +123,38 @@
     }
 
     &__btn {
-        border: 1px solid #c4cce6;
-        background: var(--al-color-surface);
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        border: 0;
+        background: transparent;
         border-radius: var(--al-radius-sm);
-        padding: 6px 9px;
+        padding: 6px 0;
         cursor: pointer;
-        font-size: 12px;
+        font-size: 13px;
         font-family: inherit;
-        color: var(--al-color-text);
+        color: #4b5563;
 
         &:hover {
-            background: #f8fafc;
+            color: var(--al-color-primary);
+            background: transparent;
+        }
+
+        &[data-action='download']::after {
+            content: '';
+            width: 18px;
+            height: 18px;
+            background-color: currentColor;
+            -webkit-mask:
+                linear-gradient(#000 0 0) 8px 2px / 2px 10px no-repeat,
+                linear-gradient(135deg, transparent 45%, #000 46% 55%, transparent 56%) 5px 9px / 8px 8px no-repeat,
+                linear-gradient(45deg, transparent 45%, #000 46% 55%, transparent 56%) 5px 9px / 8px 8px no-repeat,
+                linear-gradient(#000 0 0) 3px 15px / 12px 2px no-repeat;
+            mask:
+                linear-gradient(#000 0 0) 8px 2px / 2px 10px no-repeat,
+                linear-gradient(135deg, transparent 45%, #000 46% 55%, transparent 56%) 5px 9px / 8px 8px no-repeat,
+                linear-gradient(45deg, transparent 45%, #000 46% 55%, transparent 56%) 5px 9px / 8px 8px no-repeat,
+                linear-gradient(#000 0 0) 3px 15px / 12px 2px no-repeat;
         }
 
         &--danger {

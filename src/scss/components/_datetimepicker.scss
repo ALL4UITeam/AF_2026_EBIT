@@ -180,14 +180,14 @@
             
             // 오늘 날짜
             &.xdsoft_today {
-                color: #2196F3;
+                color: var(--al-color-primary);
                 font-weight: 600;
             }
             
             // 선택된 날짜
             &.xdsoft_current,
             &.xdsoft_default {
-                background: #2196F3;
+                background: var(--al-color-primary);
                 color: #fff;
                 font-weight: 600;
             }
@@ -264,11 +264,11 @@
                 
                 &:hover {
                     color: #fff;
-                    background: #2196F3;
+                    background: var(--al-color-primary);
                 }
                 
                 &.xdsoft_current {
-                    background: #2196F3;
+                    background: var(--al-color-primary);
                     color: #fff;
                     font-weight: 600;
                 }
@@ -306,7 +306,7 @@
                 }
                 
                 &.xdsoft_current {
-                    background: #2196F3;
+                    background: var(--al-color-primary);
                     color: #fff;
                     font-weight: 600;
                 }

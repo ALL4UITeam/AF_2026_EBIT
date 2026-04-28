@@ -20,12 +20,17 @@ export function initTabs(root) {
             const isSel = tab === btn;
             tab.setAttribute('aria-selected', isSel ? 'true' : 'false');
             tab.tabIndex = isSel ? 0 : -1;
+            tab.classList.toggle('tabs__tab--active', isSel);
             tab.classList.toggle('al-tabs__tab--active', isSel);
             const panelId = tab.getAttribute('aria-controls');
+            const currentTabId = tab.getAttribute('data-al-tab');
             const panel = panelId
                 ? document.getElementById(panelId)
-                : tabsRoot.querySelector(`[data-al-tabpanel="${CSS.escape(tabId)}"]`);
+                : currentTabId
+                    ? tabsRoot.querySelector(`[data-al-tabpanel="${CSS.escape(currentTabId)}"]`)
+                    : null;
             if (panel) {
+                panel.classList.toggle('tabs__panel--active', isSel);
                 panel.classList.toggle('al-tabs__panel--active', isSel);
                 if (isSel) panel.removeAttribute('hidden');
                 else panel.setAttribute('hidden', '');

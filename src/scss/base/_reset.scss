@@ -47,6 +47,18 @@ button,a{
     background-color: transparent;
 }
 
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
 // ====== 공통 스크롤바 스타일 (전체 페이지 공통) ======
 * {
     // Webkit 브라우저 (Chrome, Safari, Edge)

@@ -6,7 +6,7 @@
     display: none;
     align-items: center;
     justify-content: center;
-    z-index: 20;
+    z-index: 1450;
     padding: 16px;
 
     &[data-open='true'] {
@@ -28,50 +28,32 @@
 
     &__header {
         margin: 0 24px;
-        padding: 24px 0 18px;
-        border-bottom: 2px solid #dbe5ef;
+        padding: 24px 0 16px;
+        border-bottom: 1px solid #CBD5E1;
         display: flex;
         align-items: center;
         justify-content: space-between;
-        gap: 12px;
     }
 
     &__title {
         margin: 0;
-        font-size: 30px;
-        font-weight: 800;
-        color: #071225;
-        letter-spacing: -0.04em;
+        font-size: 21px;
+        font-weight: 700;
+        color: #0F172A;
+        
     }
 
     &__close {
         flex-shrink: 0;
-        width: 40px;
-        height: 40px;
-        border: 0;
-        border-radius: 50%;
-        background: transparent;
-        cursor: pointer;
-        font-size: 38px;
-        line-height: 1;
-        padding: 0;
-        color: #071225;
-        display: grid;
-        place-items: center;
-
-        &:hover {
-            background: var(--al-color-surface-soft);
-            color: var(--al-color-text);
-        }
-
-        &:focus-visible {
-            outline: 2px solid var(--al-color-primary);
-            outline-offset: 2px;
-        }
+        width: 24px;
+        height: 24px;
+        background: url('@/assets/images/common/icon-modal-close.svg') no-repeat center center;
+        font-size: 0;
+        
     }
 
     &__body {
-        padding: 34px 28px 22px;
+        padding: 20px 24px;
         text-align: center;
         color: var(--al-color-text);
     }
@@ -108,24 +90,19 @@
 
     &__message {
         margin: 0;
-        font-size: 26px;
+        font-size: 19px;
         line-height: 1.35;
-        color: #1e2a3a;
-        font-weight: 800;
-        letter-spacing: -0.04em;
+        color: #1E293B;
     }
 
     &__submessage {
         margin: 14px 0 0;
-        font-size: 20px;
+        font-size: 17px;
         line-height: 1.35;
-        color: #52657a;
-        font-weight: 500;
-        letter-spacing: -0.04em;
-
+        color: #475569;
         strong {
-            color: var(--al-color-primary);
-            font-weight: 800;
+            color: #03699C;
+            font-weight: 700;
         }
     }
 
@@ -159,49 +136,43 @@
 
         .modal__header,
         .al-modal__header {
-            padding: 14px 28px;
+            padding: 15px 32px;
             border-bottom: 0;
             background: var(--al-color-primary-light);
+            margin: 0;
         }
 
         .modal__title,
         .al-modal__title {
-            font-size: 20px;
-            font-weight: 800;
+            font-size: 21px;
+            font-weight: 700;
             color: #fff;
         }
 
         .modal__close,
         .al-modal__close {
-            background: rgba(255, 255, 255, 0.24);
-            color: #fff;
-
-            &:hover {
-                background: rgba(255, 255, 255, 0.34);
-                color: #fff;
-            }
-
-            &:focus-visible {
-                outline-color: #fff;
-            }
+            width: 32px;
+            height: 32px;
+            background: url('@/assets/images/common/icon-modal-close-2.svg') no-repeat center center;
+            font-size: 0;
+            
         }
 
         .modal__body,
         .al-modal__body {
-            padding: 28px;
+            padding: 32px;
             text-align: left;
             overflow-y: auto;
-            background: #f7fbff;
+            background: #F8FAFC;
         }
 
         .modal__footer,
         .al-modal__footer {
             justify-content: space-between;
             gap: 16px;
-            padding: 18px 28px;
-            border-top: 1px solid #e7eef6;
-            background: rgba(255, 255, 255, 0.96);
-            box-shadow: 0 -8px 20px rgba(4, 7, 26, 0.06);
+            padding: 16px 32px;
+            background: #F8FAFC;
+            box-shadow: 0 -4px 12px 0 rgba(0, 0, 0, 0.05);
         }
     }
 

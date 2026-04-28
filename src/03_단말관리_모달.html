@@ -19,207 +19,36 @@
       {{> nav }}
       <main class="al-content" id="alContent">
         <div class="mdm-list">
-          <button type="button" class="btn btn--primary btn--md" data-al-modal-open="mdm-regist">단말 등록(설치업체)</button>
+          <button type="button" class="btn btn--primary btn--md" data-al-modal-open="mdm-reglist">단말 등록(설치업체)</button>
           <button type="button" class="btn btn--primary btn--md" data-al-modal-open="mdm-detail">단말 상세 정보</button>
+          <button type="button" class="btn btn--primary btn--md" data-al-modal-open="mdm-regist">단말 등록</button>
+          <button type="button" class="btn btn--primary btn--md" data-al-modal-open="mdm-regist2">단말 등록-정류장 맵핑</button>
+          <button type="button" class="btn btn--primary btn--md" data-al-modal-open="mdm-regist3">단말 등록-완료</button>
+          <button type="button" class="btn btn--primary btn--md" data-al-modal-open="mdm-detail-view">단말 상세
+            정보-완료</button>
+          <button type="button" class="btn btn--primary btn--md" data-al-modal-open="mdm-customer-regist">단말 - 고객사
+            등록</button>
+          <button type="button" class="btn btn--primary btn--md" data-al-modal-open="mdm-customer-select">단말 - 고객사
+            선택</button>
+          <button type="button" class="btn btn--primary btn--md" data-al-modal-open="mdm-customer-complete">단말 - 고객사
+            등록-완료</button>
+          <button type="button" class="btn btn--primary btn--md" data-al-modal-open="mdm-group-regist">그룹 단말 등록</button>
+          <button type="button" class="btn btn--primary btn--md" data-al-modal-open="mdm-group-detail">그룹 단말 상세</button>
+          <button type="button" class="btn btn--primary btn--md" data-al-modal-open="mdm-remote-detail">원격 제어 상세</button>
+          <button type="button" class="btn btn--primary btn--md" data-al-modal-open="mdm-remote-history-detail">원격 이력 상세</button>
+          <button type="button" class="btn btn--primary btn--md" data-al-modal-open="mdm-remote-request">단말 원격 요청</button>
+          <button type="button" class="btn btn--primary btn--md" data-al-modal-open="mdm-status-detail-info">상태 이력 상세(단말정보)</button>
+          <button type="button" class="btn btn--primary btn--md" data-al-modal-open="mdm-status-detail-history">상태 이력 상세(상태이력)</button>
+          <button type="button" class="btn btn--primary btn--md" data-al-modal-open="mdm-status-detail-remote">상태 이력 상세(원격제어)</button>
         </div>
 
-        <div class="modal-backdrop" id="mdm-regist" data-al-modal-backdrop data-open="false" aria-hidden="true">
-          <div class="modal modal--form" role="dialog" aria-modal="true" tabindex="-1">
-            <div class="modal__header">
-              <h2 class="modal__title" id="appRegistTitle">단말 등록(설치업체)</h2>
-              <button type="button" class="modal__close" data-al-modal-close="mdm-regist" aria-label="닫기">닫기</button>
-            </div>
-            <div class="modal__body">
-              <div class="mdm-wrapper">
-                <nav class="step" aria-label="작업 진행 단계">
-                  <ol class="step__list">
-                    <li class="step__item step__item--current">
-                      <span class="step__marker" aria-hidden="true"><i><img class="step-icon__image"
-                            src="/assets/images/icon/step/step-current01.svg" alt="단말선택" aria-hidden="true"></i></span>
-                      <span class="step__meta">1단계</span>
-                      <strong class="step__label">단말 선택</strong>
-                    </li>
-                    <li class="step__item step__item--upcoming">
-                      <span class="step__marker" aria-hidden="true"><i><img class="step-icon__image"
-                            src="/assets/images/icon/step/step-upcoming02.svg" alt="단말선택" aria-hidden="true"></i></span>
-                      <span class="step__meta">2단계</span>
-                      <strong class="step__label">작업자 선택</strong>
-                    </li>
-                    <li class="step__item step__item--upcoming" aria-current="step">
-                      <span class="step__marker" aria-hidden="true"><i><img class="step-icon__image"
-                            src="/assets/images/icon/step/step-upcoming03.svg" alt="정류장" aria-hidden="true"></i></span>
-                      <span class="step__meta">3단계</span>
-                      <strong class="step__label">작업 내용</strong>
-                    </li>
-                    <li class="step__item step__item--upcoming">
-                      <span class="step__marker" aria-hidden="true"><i><img class="step-icon__image"
-                            src="/assets/images/icon/step/step-upcoming04.svg" alt="완료" aria-hidden="true"></i></span>
-                      <span class="step__meta">4단계</span>
-                      <strong class="step__label">완료</strong>
-                    </li>
-                  </ol>
-                </nav>
-                <div class="mdm-content">
-                  <div class="modal-card">
-                    <div class="modal-card__header">
-                      <h3 class="modal-card__title">단말 선택</h3>
-                    </div>
-                    <div class="modal-card__body">
-                      <div class="modal_card_content">
-                        <div class="search">
-                          <p class="search__total">총 <strong>5</strong>건</p>
-                          <form class="form form--toolbar form--search" action="#" role="search" aria-label="가이드 검색 폼">
-                            <span class="form__field form__field--search">
-                              <input class="form__input" type="search" inputmode="search" autocomplete="off"
-                                placeholder="검색어를 입력해주세요." aria-label="검색어">
-                              <button type="button" class="form__icon-btn" aria-label="검색"></button>
-                            </span>
-                          </form>
-                        </div>
+        {{>modal-collection }}
 
-                        <div class="table-wrapper">
-                          <table class="tbl-style1">
-                            <colgroup>
-                              <col style="width: 100px;">
-                              <col style="width: auto;">
-                            </colgroup>
-                            <thead>
-                              <tr>
-                                <th>&nbsp;</th>
-                                <th class="left">단말 ID</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              <tr>
-                                <td>
-                                  <label class="al-radio"><input class="al-radio__input" type="radio"><span class="al-radio__control" aria-hidden="true"></span></label>
-                                </td>
-                                <td class="left">1234567890</td>
-                              </tr>
-                            </tbody>
-                          </table>
-                        </div>
-                        <!-- // table-wrapper -->
-                        <nav class="pagination al-pagination" data-al-pagination data-al-pagination-current="1"
-                          data-al-pagination-total="99" aria-label="페이지 네비게이션">
-                          <button type="button" class="pagination__nav al-pagination__nav" data-al-page-first
-                            aria-label="첫 페이지">처음</button>
-                          <button type="button" class="pagination__nav al-pagination__nav al-pagination__nav--prev"
-                            data-al-page-prev aria-label="이전 페이지">이전</button>
-                          <div class="pagination__pages al-pagination__pages" data-al-pagination-pages></div>
-                          <button type="button" class="pagination__nav al-pagination__nav al-pagination__nav--next"
-                            data-al-page-next aria-label="다음 페이지">다음</button>
-                          <button type="button" class="pagination__nav al-pagination__nav" data-al-page-last
-                            aria-label="마지막 페이지">마지막</button>
-                        </nav>
-                        <!-- // pagination -->
-                      </div>
-                    </div>
-                    <!-- //modal-card__body -->
-                  </div>
-                </div>
-                <!-- // mdm-content -->
-              </div>
-              <!-- // mdm-wrapper -->
-            </div>
-            <div class="modal__footer">
-              <button type="button" class="btn btn--secondary btn--md" data-al-modal-close="mdm-regist">취소</button>
-              <div class="modal__actions">
-                <!-- <button type="button" class="btn btn--secondary btn--md">이전</button> -->
-                <button type="button" class="btn btn--primary btn--md">다음</button>
-              </div>
-            </div>
-            <!-- //modal__footer -->
-          </div>
-        </div>
-        <!-- // mdm-regist -->
-        
-        <div class="modal-backdrop" id="mdm-detail" data-al-modal-backdrop data-open="true" aria-hidden="true">
-          <div class="modal modal--form" role="dialog" aria-modal="true" tabindex="-1">
-            <div class="modal__header">
-              <h2 class="modal__title" id="appRegistTitle">단말 상세 정보</h2>
-              <button type="button" class="modal__close" data-al-modal-close="mdm-detail" aria-label="닫기">닫기</button>
-            </div>
-            <div class="modal__body">
-              <div class="mdm-wrapper">
-                
-                <div class="mdm-content">
-                  <div class="modal-card">
-                    <div class="modal-card__header">
-                      <h3 class="modal-card__title">단말 선택</h3>
-                    </div>
-                    <div class="modal-card__body">
-                      <div class="modal_card_content">
-                        <div class="search">
-                          <p class="search__total">총 <strong>5</strong>건</p>
-                          <form class="form form--toolbar form--search" action="#" role="search" aria-label="가이드 검색 폼">
-                            <span class="form__field form__field--search">
-                              <input class="form__input" type="search" inputmode="search" autocomplete="off"
-                                placeholder="검색어를 입력해주세요." aria-label="검색어">
-                              <button type="button" class="form__icon-btn" aria-label="검색"></button>
-                            </span>
-                          </form>
-                        </div>
 
-                        <div class="table-wrapper">
-                          <table class="tbl-style1">
-                            <colgroup>
-                              <col style="width: 100px;">
-                              <col style="width: auto;">
-                            </colgroup>
-                            <thead>
-                              <tr>
-                                <th>&nbsp;</th>
-                                <th class="left">단말 ID</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              <tr>
-                                <td>
-                                  <label class="al-radio"><input class="al-radio__input" type="radio"><span class="al-radio__control" aria-hidden="true"></span></label>
-                                </td>
-                                <td class="left">1234567890</td>
-                              </tr>
-                            </tbody>
-                          </table>
-                        </div>
-                        <!-- // table-wrapper -->
-                        <nav class="pagination al-pagination" data-al-pagination data-al-pagination-current="1"
-                          data-al-pagination-total="99" aria-label="페이지 네비게이션">
-                          <button type="button" class="pagination__nav al-pagination__nav" data-al-page-first
-                            aria-label="첫 페이지">처음</button>
-                          <button type="button" class="pagination__nav al-pagination__nav al-pagination__nav--prev"
-                            data-al-page-prev aria-label="이전 페이지">이전</button>
-                          <div class="pagination__pages al-pagination__pages" data-al-pagination-pages></div>
-                          <button type="button" class="pagination__nav al-pagination__nav al-pagination__nav--next"
-                            data-al-page-next aria-label="다음 페이지">다음</button>
-                          <button type="button" class="pagination__nav al-pagination__nav" data-al-page-last
-                            aria-label="마지막 페이지">마지막</button>
-                        </nav>
-                        <!-- // pagination -->
-                      </div>
-                    </div>
-                    <!-- //modal-card__body -->
-                  </div>
-                </div>
-                <!-- // mdm-content -->
-              </div>
-              <!-- // mdm-wrapper -->
-            </div>
-            <div class="modal__footer">
-              <button type="button" class="btn btn--secondary btn--md" data-al-modal-close="mdm-regist">취소</button>
-              <div class="modal__actions">
-                <!-- <button type="button" class="btn btn--secondary btn--md">이전</button> -->
-                <button type="button" class="btn btn--primary btn--md">다음</button>
-              </div>
-            </div>
-            <!-- //modal__footer -->
-          </div>
-        </div>
-        <!-- // mdm-regist -->
-    </main>
-    <!-- // al-content -->
-  </div>
+
+      </main>
+      <!-- // al-content -->
+    </div>
   </div>
 
 

@@ -67,7 +67,8 @@
                     <tbody>
                       <tr>
                         <td>
-                          <label class="al-radio"><input class="al-radio__input" type="radio"><span class="al-radio__control" aria-hidden="true"></span></label>
+                          <label class="al-radio"><input class="al-radio__input" type="radio"><span
+                              class="al-radio__control" aria-hidden="true"></span></label>
                         </td>
                         <td class="left">1234567890</td>
                       </tr>
@@ -101,17 +102,24 @@
   <div class="modal modal--form w-960" role="dialog" aria-modal="true" tabindex="-1">
     <div class="modal__header">
       <h2 class="modal__title">단말 상태 이력 상세</h2>
-      <button type="button" class="modal__close" data-al-modal-close="mdm-status-detail-info" aria-label="닫기">닫기</button>
+      <button type="button" class="modal__close" data-al-modal-close="mdm-status-detail-info"
+        aria-label="닫기">닫기</button>
     </div>
     <div class="modal__body">
       <div class="mdm-status-modal mdm-status-modal--info">
         <section class="modal-card mdm-status-modal__summary">
-          <div class="modal-card__header"><h3 class="modal-card__title">현재 단말 정보</h3></div>
-          <div class="modal-card__body">
-            <div class="mdm-status-modal__head-grid">
-              <div class="mdm-status-modal__head-box"><p>단말 ID</p><strong>BISD009</strong></div>
-              <div class="mdm-status-modal__head-box"><p>정류장 정보</p><strong>BJ-009_양천향교역 1번 출구</strong></div>
-              <div class="mdm-status-modal__head-box"><p>복합 상태</p><span class="al-badge al-badge--danger al-badge--sm">긴급</span></div>
+          <div class="modal-card__header">
+            <h3 class="modal-card__title">현재 단말 정보</h3>
+          </div>
+          <div class="mdm-status-modal__head-grid">
+            <div class="mdm-status-modal__head-box">
+              <p>단말 ID</p><strong>BISD009</strong>
+            </div>
+            <div class="mdm-status-modal__head-box">
+              <p>정류장 정보</p><strong>BJ-009_양천향교역 1번 출구</strong>
+            </div>
+            <div class="mdm-status-modal__head-box">
+              <p>복합 상태</p><span class="al-badge al-badge--danger al-badge--sm">긴급</span>
             </div>
           </div>
         </section>
@@ -119,35 +127,70 @@
           <div class="modal-card__body">
             <div class="tabs tabs--line mdm-status-modal__tabs" data-al-tabs>
               <div class="tabs__list" role="tablist" aria-label="단말 상태 탭">
-                <button type="button" class="tabs__tab tabs__tab--active" role="tab" id="mdm-status-info-tab-a" data-al-tab="mdm-status-info-a" aria-selected="true" aria-controls="mdm-status-info-panel-a">단말 정보 ✓</button>
-                <button type="button" class="tabs__tab" role="tab" id="mdm-status-info-tab-b" data-al-tab="mdm-status-info-b" aria-selected="false" aria-controls="mdm-status-info-panel-b" tabindex="-1">상태 이력</button>
-                <button type="button" class="tabs__tab" role="tab" id="mdm-status-info-tab-c" data-al-tab="mdm-status-info-c" aria-selected="false" aria-controls="mdm-status-info-panel-c" tabindex="-1">원격 제어</button>
+                <button type="button" class="tabs__tab tabs__tab--active" role="tab" id="mdm-status-info-tab-a"
+                  data-al-tab="mdm-status-info-a" aria-selected="true" aria-controls="mdm-status-info-panel-a">단말
+                  정보</button>
+                <button type="button" class="tabs__tab" role="tab" id="mdm-status-info-tab-b"
+                  data-al-tab="mdm-status-info-b" aria-selected="false" aria-controls="mdm-status-info-panel-b"
+                  tabindex="-1">상태 이력</button>
+                <button type="button" class="tabs__tab" role="tab" id="mdm-status-info-tab-c"
+                  data-al-tab="mdm-status-info-c" aria-selected="false" aria-controls="mdm-status-info-panel-c"
+                  tabindex="-1">원격 제어</button>
               </div>
-              <div class="tabs__panel tabs__panel--active" role="tabpanel" id="mdm-status-info-panel-a" data-al-tabpanel="mdm-status-info-a" aria-labelledby="mdm-status-info-tab-a">
+              <div class="tabs__panel tabs__panel--active" role="tabpanel" id="mdm-status-info-panel-a"
+                data-al-tabpanel="mdm-status-info-a" aria-labelledby="mdm-status-info-tab-a">
                 <div class="mdm-status-modal__data-grid">
                   <div class="mdm-status-modal__block">
                     <h4>기본 정보</h4>
-                    <ul>
-                      <li><span>안드로이드 ID</span><strong>AD-012</strong></li>
-                      <li><span>에이전트 앱버전</span><strong>1.2 버전</strong></li>
-                      <li><span>패키지명</span><strong>class.1234.1234</strong></li>
-                      <li><span>CPU 사용률</span><strong class="danger">92%</strong> <span class="al-badge al-badge--danger al-badge--sm">치명</span></li>
+                    <ul class="round-list">
+                      <li class="round-list__item">
+                        <span class="label">안드로이드 ID</span>
+                        <strong class="value">AD-012</strong>
+                      </li>
+                      <li class="round-list__item">
+                        <span class="label">에이전트 앱버전</span>
+                        <strong class="value">1.2 버전</strong>
+                      </li>
+                      <li class="round-list__item">
+                        <span class="label">패키지명</span>
+                        <strong class="value">class.1234.1234</strong>
+                      </li>
+                      <li class="round-list__item">
+                        <span class="label">CPU 사용률</span>
+                        <strong class="value danger">92<small>%</small></strong>
+                        <span class="al-badge al-badge--danger al-badge--sm">치명</span>
+                      </li>
                     </ul>
                   </div>
                   <div class="mdm-status-modal__block mdm-status-modal__block--dashed"></div>
                   <div class="mdm-status-modal__block">
                     <h4>상세 정보</h4>
-                    <ul>
-                      <li><span>배터리 잔량</span><strong class="warn">42%</strong> <span class="al-badge al-badge--warn al-badge--sm">저전력상태</span></li>
-                      <li><span>끊긴 시간</span><strong>2026-04-09 13:00:02.093</strong></li>
-                      <li><span>이벤트 상태</span><strong>오프라인</strong></li>
-                      <li><span>마지막 수신 시간</span><strong>2026-04-09 13:00:02.093</strong></li>
+                    <ul class="round-list">
+                      <li class="round-list__item">
+                        <span class="label">배터리 잔량</span>
+                        <strong class="value warn">42<small>%</small></strong>
+                        <span class="al-badge al-badge--warn al-badge--sm">저전력상태</span>
+                      </li>
+                      <li class="round-list__item">
+                        <span class="label">끊긴 시간</span>
+                        <strong class="value">2026-04-09 <span class="time">13:00:02.093</span></strong>
+                      </li>
+                      <li class="round-list__item">
+                        <span class="label">이벤트 상태</span>
+                        <strong class="value">오프라인</strong>
+                      </li>
+                      <li class="round-list__item">
+                        <span class="label">마지막 수신 시간</span>
+                        <strong class="value">2026-04-09 <span class="time">13:00:02.093</span></strong>
+                      </li>
                     </ul>
                   </div>
                 </div>
               </div>
-              <div class="tabs__panel" role="tabpanel" id="mdm-status-info-panel-b" data-al-tabpanel="mdm-status-info-b" aria-labelledby="mdm-status-info-tab-b" hidden>상태 이력</div>
-              <div class="tabs__panel" role="tabpanel" id="mdm-status-info-panel-c" data-al-tabpanel="mdm-status-info-c" aria-labelledby="mdm-status-info-tab-c" hidden>원격 제어</div>
+              <div class="tabs__panel" role="tabpanel" id="mdm-status-info-panel-b" data-al-tabpanel="mdm-status-info-b"
+                aria-labelledby="mdm-status-info-tab-b" hidden>상태 이력</div>
+              <div class="tabs__panel" role="tabpanel" id="mdm-status-info-panel-c" data-al-tabpanel="mdm-status-info-c"
+                aria-labelledby="mdm-status-info-tab-c" hidden>원격 제어</div>
             </div>
           </div>
         </section>
@@ -164,17 +207,26 @@
   <div class="modal modal--form w-960" role="dialog" aria-modal="true" tabindex="-1">
     <div class="modal__header">
       <h2 class="modal__title">단말 상태 이력 상세</h2>
-      <button type="button" class="modal__close" data-al-modal-close="mdm-status-detail-history" aria-label="닫기">닫기</button>
+      <button type="button" class="modal__close" data-al-modal-close="mdm-status-detail-history"
+        aria-label="닫기">닫기</button>
     </div>
     <div class="modal__body">
       <div class="mdm-status-modal mdm-status-modal--history">
         <section class="modal-card mdm-status-modal__summary">
-          <div class="modal-card__header"><h3 class="modal-card__title">현재 단말 정보</h3></div>
+          <div class="modal-card__header">
+            <h3 class="modal-card__title">현재 단말 정보</h3>
+          </div>
           <div class="modal-card__body">
             <div class="mdm-status-modal__head-grid">
-              <div class="mdm-status-modal__head-box"><p>단말 ID</p><strong>BISD009</strong></div>
-              <div class="mdm-status-modal__head-box"><p>정류장 정보</p><strong>BJ-009_양천향교역 1번 출구</strong></div>
-              <div class="mdm-status-modal__head-box"><p>복합 상태</p><span class="al-badge al-badge--danger al-badge--sm">긴급</span></div>
+              <div class="mdm-status-modal__head-box">
+                <p>단말 ID</p><strong>BISD009</strong>
+              </div>
+              <div class="mdm-status-modal__head-box">
+                <p>정류장 정보</p><strong>BJ-009_양천향교역 1번 출구</strong>
+              </div>
+              <div class="mdm-status-modal__head-box">
+                <p>복합 상태</p><span class="al-badge al-badge--danger al-badge--sm">긴급</span>
+              </div>
             </div>
           </div>
         </section>
@@ -182,55 +234,150 @@
           <div class="modal-card__body">
             <div class="tabs tabs--line mdm-status-modal__tabs" data-al-tabs>
               <div class="tabs__list" role="tablist" aria-label="단말 상태 탭">
-                <button type="button" class="tabs__tab" role="tab" id="mdm-status-his-tab-a" data-al-tab="mdm-status-his-a" aria-selected="false" aria-controls="mdm-status-his-panel-a" tabindex="-1">단말 정보</button>
-                <button type="button" class="tabs__tab tabs__tab--active" role="tab" id="mdm-status-his-tab-b" data-al-tab="mdm-status-his-b" aria-selected="true" aria-controls="mdm-status-his-panel-b">상태 이력 ✓</button>
-                <button type="button" class="tabs__tab" role="tab" id="mdm-status-his-tab-c" data-al-tab="mdm-status-his-c" aria-selected="false" aria-controls="mdm-status-his-panel-c" tabindex="-1">원격 제어</button>
+                <button type="button" class="tabs__tab" role="tab" id="mdm-status-his-tab-a"
+                  data-al-tab="mdm-status-his-a" aria-selected="false" aria-controls="mdm-status-his-panel-a"
+                  tabindex="-1">단말 정보</button>
+                <button type="button" class="tabs__tab tabs__tab--active" role="tab" id="mdm-status-his-tab-b"
+                  data-al-tab="mdm-status-his-b" aria-selected="true" aria-controls="mdm-status-his-panel-b">상태
+                  이력</button>
+                <button type="button" class="tabs__tab" role="tab" id="mdm-status-his-tab-c"
+                  data-al-tab="mdm-status-his-c" aria-selected="false" aria-controls="mdm-status-his-panel-c"
+                  tabindex="-1">원격 제어</button>
               </div>
-              <div class="tabs__panel tabs__panel--active" role="tabpanel" id="mdm-status-his-panel-b" data-al-tabpanel="mdm-status-his-b" aria-labelledby="mdm-status-his-tab-b">
+              <div class="tabs__panel tabs__panel--active" role="tabpanel" id="mdm-status-his-panel-b"
+                data-al-tabpanel="mdm-status-his-b" aria-labelledby="mdm-status-his-tab-b">
                 <div class="mdm-status-modal__filter-row">
-                  <span class="form__field"><input class="form__input" type="text" value="2026-03-31" readonly></span>
-                  <span class="form__field"><input class="form__input" type="text" value="오전 06시" readonly></span>
-                  <span class="form__field"><input class="form__input" type="text" value="2026-03-31" readonly></span>
-                  <span class="form__field"><input class="form__input" type="text" value="오전 06시" readonly></span>
+                  <div class="form__date_group">
+                    <label for="mdm-status-his-date">시작시간</label>
+                    <span class="form__field form__field--date">
+                      <input class="form__input" type="text" value="2026-03-31" aria-label="기간" readonly />
+                      <button type="button" class="form__icon-btn form__icon-btn--calendar" data-date-toggle
+                        aria-label="기간 선택"></button>
+                    </span>
+                    <span class="form__field form__field--time"><input class="form__input" type="text" value="오전 06시"
+                        readonly></span>
+                  </div>
+                  <div class="form__date_group">
+                    <label for="mdm-status-his-time">종료시간</label>
+                    <span class="form__field form__field--date">
+                      <input class="form__input" type="text" value="2026-04-07" aria-label="기간" readonly />
+                      <button type="button" class="form__icon-btn form__icon-btn--calendar" data-date-toggle
+                        aria-label="기간 선택"></button>
+                    </span>
+                    <span class="form__field form__field--time"><input class="form__input" type="text" value="오전 06시"
+                        readonly></span>
+                  </div>
                   <button type="button" class="btn btn--secondary btn--md">조회</button>
                 </div>
                 <div class="mdm-status-modal__chart-grid">
-                  <div class="chart-placeholder">차트 영역</div><div class="chart-placeholder">차트 영역</div>
-                  <div class="chart-placeholder">차트 영역</div><div class="chart-placeholder">차트 영역</div>
+                  <div class="chart-placeholder">차트 영역</div>
+                  <div class="chart-placeholder">차트 영역</div>
+                  <div class="chart-placeholder">차트 영역</div>
+                  <div class="chart-placeholder">차트 영역</div>
                 </div>
-                <div class="mdm-status-modal__table-head"><p>총 <strong>200</strong>건</p><span class="form__field"><select class="form__select"><option>상태</option></select></span></div>
-                <div class="table-wrapper"><table class="al-table"><thead><tr><th>상태 수집 시간</th><th>CPU 사용률</th><th>RAM 사용률</th><th>배터리 잔량/온도</th><th>위도/경도</th><th>연결 상태</th><th>끊긴 시간(사유)</th><th>네트워크 신호 세기</th></tr></thead><tbody><tr><td>2026-01-26<br><small>21:40:22.093</small></td><td>12%</td><td>52%</td><td>78%<br><small>41.2°C</small></td><td>37.5665<br><small>126.9780</small></td><td>정상</td><td>정상<br><small>(통신 불량)</small></td><td>10dBm</td></tr></tbody></table></div>
+
+                <div class="divider"></div>
+
+                <div class="mdm-status-modal__table-head">
+                  <p>총 <strong>200</strong>건</p><span class="form__field"><select class="form__select">
+                      <option>상태</option>
+                    </select></span>
+                </div>
+                <div class="table-wrapper mb-20">
+                  <table class="al-table">
+                    <thead>
+                      <tr>
+                        <th>상태 수집 시간</th>
+                        <th>CPU <br>사용률</th>
+                        <th>RAM <br>사용률</th>
+                        <th style="white-space: nowrap;">배터리 잔량<br>/온도</th>
+                        <th>위도<br>/경도</th>
+                        <th>연결 상태</th>
+                        <th>끊긴 시간<br>(사유)</th>
+                        <th>네트워크 <br>신호 세기</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>
+                          <div class="time-wrap">
+                            <span class="date">2026-01-26</span>
+                            <span class="time">21:40:22.093</span>
+                          </div>
+                        </td>
+                        <td>
+                          <span class="unit-value">52<small>%</small></span>
+                        </td>
+                        <td>
+                          <span class="unit-value">52<small>%</small></span>
+                          
+                        </td>
+                        <td>
+                          <span class="unit-value">78<small>%</small></span>
+                          <span class="unit-value">41.2<small>°C</small></span>
+                          
+                        </td>
+                        <td>
+                          <span class="unit-value">37.5665<small></small></span>
+                          <span class="unit-value">126.9780<small></small></span>
+                        </td>
+                        <td>
+                          정상
+                        </td>
+                        <td>
+                          <div class="unit-text-wrap">
+                            <span class="unit-text">정상</span>
+                            <span class="unit-text-desc">(통신 불량)</span>
+                          </div>
+                        </td>
+                        <td>10dBm</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
                 {{> paging}}
               </div>
-              <div class="tabs__panel" role="tabpanel" id="mdm-status-his-panel-a" data-al-tabpanel="mdm-status-his-a" aria-labelledby="mdm-status-his-tab-a" hidden>단말 정보</div>
-              <div class="tabs__panel" role="tabpanel" id="mdm-status-his-panel-c" data-al-tabpanel="mdm-status-his-c" aria-labelledby="mdm-status-his-tab-c" hidden>원격 제어</div>
+              <div class="tabs__panel" role="tabpanel" id="mdm-status-his-panel-a" data-al-tabpanel="mdm-status-his-a"
+                aria-labelledby="mdm-status-his-tab-a" hidden>단말 정보</div>
+              <div class="tabs__panel" role="tabpanel" id="mdm-status-his-panel-c" data-al-tabpanel="mdm-status-his-c"
+                aria-labelledby="mdm-status-his-tab-c" hidden>원격 제어</div>
             </div>
           </div>
         </section>
       </div>
     </div>
     <div class="modal__footer">
-      <button type="button" class="btn btn--secondary btn--md" data-al-modal-close="mdm-status-detail-history">취소</button>
+      <button type="button" class="btn btn--secondary btn--md"
+        data-al-modal-close="mdm-status-detail-history">취소</button>
       <div class="modal__actions"><button type="button" class="btn btn--primary btn--md">확인</button></div>
     </div>
   </div>
 </div>
 
-<div class="modal-backdrop" id="mdm-status-detail-remote" data-al-modal-backdrop data-open="false" aria-hidden="true">
-  <div class="modal modal--form w-960" role="dialog" aria-modal="true" tabindex="-1">
+<div class="modal-backdrop" id="mdm-status-detail-remote" data-al-modal-backdrop data-open="true" aria-hidden="true">
+  <div class="modal modal--form w-900" role="dialog" aria-modal="true" tabindex="-1">
     <div class="modal__header">
       <h2 class="modal__title">단말 상태 이력 상세</h2>
-      <button type="button" class="modal__close" data-al-modal-close="mdm-status-detail-remote" aria-label="닫기">닫기</button>
+      <button type="button" class="modal__close" data-al-modal-close="mdm-status-detail-remote"
+        aria-label="닫기">닫기</button>
     </div>
     <div class="modal__body">
       <div class="mdm-status-modal mdm-status-modal--remote">
         <section class="modal-card mdm-status-modal__summary">
-          <div class="modal-card__header"><h3 class="modal-card__title">현재 단말 정보</h3></div>
+          <div class="modal-card__header">
+            <h3 class="modal-card__title">현재 단말 정보</h3>
+          </div>
           <div class="modal-card__body">
             <div class="mdm-status-modal__head-grid">
-              <div class="mdm-status-modal__head-box"><p>단말 ID</p><strong>BISD009</strong></div>
-              <div class="mdm-status-modal__head-box"><p>정류장 정보</p><strong>BJ-009_양천향교역 1번 출구</strong></div>
-              <div class="mdm-status-modal__head-box"><p>복합 상태</p><span class="al-badge al-badge--danger al-badge--sm">긴급</span></div>
+              <div class="mdm-status-modal__head-box">
+                <p>단말 ID</p><strong>BISD009</strong>
+              </div>
+              <div class="mdm-status-modal__head-box">
+                <p>정류장 정보</p><strong>BJ-009_양천향교역 1번 출구</strong>
+              </div>
+              <div class="mdm-status-modal__head-box">
+                <p>복합 상태</p><span class="al-badge al-badge--danger al-badge--sm">긴급</span>
+              </div>
             </div>
           </div>
         </section>
@@ -238,36 +385,90 @@
           <div class="modal-card__body">
             <div class="tabs tabs--line mdm-status-modal__tabs" data-al-tabs>
               <div class="tabs__list" role="tablist" aria-label="단말 상태 탭">
-                <button type="button" class="tabs__tab" role="tab" id="mdm-status-rem-tab-a" data-al-tab="mdm-status-rem-a" aria-selected="false" aria-controls="mdm-status-rem-panel-a" tabindex="-1">단말 정보</button>
-                <button type="button" class="tabs__tab" role="tab" id="mdm-status-rem-tab-b" data-al-tab="mdm-status-rem-b" aria-selected="false" aria-controls="mdm-status-rem-panel-b" tabindex="-1">상태 이력</button>
-                <button type="button" class="tabs__tab tabs__tab--active" role="tab" id="mdm-status-rem-tab-c" data-al-tab="mdm-status-rem-c" aria-selected="true" aria-controls="mdm-status-rem-panel-c">원격 제어 ✓</button>
+                <button type="button" class="tabs__tab" role="tab" id="mdm-status-rem-tab-a"
+                  data-al-tab="mdm-status-rem-a" aria-selected="false" aria-controls="mdm-status-rem-panel-a"
+                  tabindex="-1">단말 정보</button>
+                <button type="button" class="tabs__tab" role="tab" id="mdm-status-rem-tab-b"
+                  data-al-tab="mdm-status-rem-b" aria-selected="false" aria-controls="mdm-status-rem-panel-b"
+                  tabindex="-1">상태 이력</button>
+                <button type="button" class="tabs__tab tabs__tab--active" role="tab" id="mdm-status-rem-tab-c" data-al-tab="mdm-status-rem-c" aria-selected="true" aria-controls="mdm-status-rem-panel-c">원격 제어</button>
               </div>
-              <div class="tabs__panel tabs__panel--active" role="tabpanel" id="mdm-status-rem-panel-c" data-al-tabpanel="mdm-status-rem-c" aria-labelledby="mdm-status-rem-tab-c">
+              <div class="tabs__panel tabs__panel--active" role="tabpanel" id="mdm-status-rem-panel-c"
+                data-al-tabpanel="mdm-status-rem-c" aria-labelledby="mdm-status-rem-tab-c">
                 <div class="mdm-status-modal__remote-grid">
                   <div class="left">
                     <h4>원격 제어 명령</h4>
-                    <div class="mdm-status-modal__command"><span class="form__field"><select class="form__select"><option>시스템 재부팅</option></select></span><button type="button" class="btn btn--secondary btn--md">요청</button></div>
+                    <div class="mdm-status-modal__command"><span class="form__field"><select class="form__select">
+                          <option>시스템 재부팅</option>
+                        </select></span><button type="button" class="btn btn--secondary btn--md">요청</button></div>
                     <div class="mdm-status-modal__dashed"></div>
                     <h4>단말 상태 정보</h4>
-                    <ul class="mdm-status-modal__simple-list">
-                      <li><span>CPU 사용률</span><span class="al-badge al-badge--danger al-badge--sm">치명</span><strong class="danger">92%</strong></li>
-                      <li><span>RAM 사용률</span><span class="al-badge al-badge--warn al-badge--sm">경미</span><strong class="warn">62%</strong></li>
-                      <li><span>배터리 잔량</span><strong>91%</strong></li>
-                      <li><span>통신 상태</span><strong>불량</strong></li>
-                      <li><span>끊긴 시간</span><strong>2026-04-09 13:00:02.093</strong></li>
+                    <ul class="round-list">
+                      <li class="round-list__item"><span class="label">CPU 사용률</span><span class="al-badge al-badge--danger al-badge--sm">치명</span><strong
+                          class="danger">92%</strong></li>
+                      <li class="round-list__item"><span class="label">RAM 사용률</span><span class="al-badge al-badge--warn al-badge--sm">경미</span><strong
+                          class="warn">62%</strong></li>
+                      <li class="round-list__item"><span class="label">배터리 잔량</span><strong class="value">91%</strong></li>
+                      <li class="round-list__item"><span class="label">통신 상태</span><strong>불량</strong></li>
+                      <li class="round-list__item"><span class="label">끊긴 시간</span><strong>
+                        <div class="time-wrap inline">
+                          <span class="date">2026-01-26</span>
+                          <span class="time">21:40:22.093</span>
+                        </div>
+                      </strong></li>
                     </ul>
                   </div>
                   <div class="right">
                     <h4>마지막 요청 스냅샷</h4>
                     <div class="image-placeholder">이미지 영역</div>
                     <div class="mdm-status-modal__dashed"></div>
-                    <div class="mdm-status-modal__table-head"><p>원격 제어 이력</p><span class="form__field"><select class="form__select"><option>시스템 재부팅</option></select></span></div>
-                    <div class="table-wrapper"><table class="al-table"><thead><tr><th>원격 요청 시간</th><th>원격 제어 명령</th></tr></thead><tbody><tr><td>2026-01-26<br><small>21:40:22.093</small></td><td>시스템 재부팅</td></tr><tr><td>2026-01-26<br><small>21:40:22.093</small></td><td>화면 밝기 조정 ( 50% )</td></tr></tbody></table></div>
+                    <div class="mdm-status-modal__table-head">
+                      <p>원격 제어 이력</p><span class="form__field">
+                        <select class="form__select" style="width:200px">
+                          <option>시스템 재부팅</option>
+                        </select></span>
+                    </div>
+                    <div class="table-wrapper">
+                      <table class="al-table">
+                        <colgroup>
+                          <col style="width: 166px;">
+                          <col style="width: auto;">
+                        </colgroup>
+                        <thead>
+                          <tr>
+                            <th class="left">원격 요청 시간</th>
+                            <th>원격 제어 명령</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td class="left">
+                              <div class="time-wrap">
+                                <span class="date">2026-01-26</span>
+                                <span class="time">21:40:22.093</span>
+                              </div>
+                            </td>
+                            <td>시스템 재부팅</td>
+                          </tr>
+                          <tr>
+                            <td class="left">
+                              <div class="time-wrap">
+                                <span class="date">2026-01-26</span>
+                                <span class="time">21:40:22.093</span>
+                              </div>
+                            </td>
+                            <td>화면 밝기 조정 ( 50% )</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
                   </div>
                 </div>
               </div>
-              <div class="tabs__panel" role="tabpanel" id="mdm-status-rem-panel-a" data-al-tabpanel="mdm-status-rem-a" aria-labelledby="mdm-status-rem-tab-a" hidden>단말 정보</div>
-              <div class="tabs__panel" role="tabpanel" id="mdm-status-rem-panel-b" data-al-tabpanel="mdm-status-rem-b" aria-labelledby="mdm-status-rem-tab-b" hidden>상태 이력</div>
+              <div class="tabs__panel" role="tabpanel" id="mdm-status-rem-panel-a" data-al-tabpanel="mdm-status-rem-a"
+                aria-labelledby="mdm-status-rem-tab-a" hidden>단말 정보</div>
+              <div class="tabs__panel" role="tabpanel" id="mdm-status-rem-panel-b" data-al-tabpanel="mdm-status-rem-b"
+                aria-labelledby="mdm-status-rem-tab-b" hidden>상태 이력</div>
             </div>
           </div>
         </section>
@@ -293,10 +494,13 @@
           </div>
           <div class="modal-card__body">
             <ul class="mdm-remote__meta">
-              <li class="mdm-remote__meta-item"><span class="label">원격 제어 명령</span><strong class="value">화면 갱신</strong></li>
-              <li class="mdm-remote__meta-item"><span class="label">원격 작업 ID</span><strong class="value">JOB-1</strong></li>
+              <li class="mdm-remote__meta-item"><span class="label">원격 제어 명령</span><strong class="value">화면 갱신</strong>
+              </li>
+              <li class="mdm-remote__meta-item"><span class="label">원격 작업 ID</span><strong class="value">JOB-1</strong>
+              </li>
               <li class="mdm-remote__meta-item"><span class="label">고객사</span><strong class="value">서울</strong></li>
-              <li class="mdm-remote__meta-item"><span class="label">작업 일시</span><strong class="value">2026-01-01 12:00</strong></li>
+              <li class="mdm-remote__meta-item"><span class="label">작업 일시</span><strong class="value">2026-01-01
+                  12:00</strong></li>
             </ul>
           </div>
         </section>
@@ -330,16 +534,17 @@
                 <div class="table-wrapper">
                   <table class="al-table mdm-remote__table">
                     <colgroup>
-                      <col style="width: 60px;">
+                      <col style="width: 40px;">
                       <col style="width: auto;">
                       <col style="width: 100px;">
                       <col style="width: 90px;">
-                      <col style="width: 150px;">
-                      <col style="width: 110px;">
+                      <col style="width: 160px;">
+                      <col style="width: 130px;">
                     </colgroup>
                     <thead>
                       <tr>
-                        <th><label class="al-checkbox"><input class="al-checkbox__input" type="checkbox"><span class="al-checkbox__box" aria-hidden="true"></span></label></th>
+                        <th><label class="al-checkbox"><input class="al-checkbox__input" type="checkbox"><span
+                              class="al-checkbox__box" aria-hidden="true"></span></label></th>
                         <th class="left">단말 ID</th>
                         <th>상태</th>
                         <th>스냅샷</th>
@@ -349,34 +554,68 @@
                     </thead>
                     <tbody>
                       <tr>
-                        <td><label class="al-checkbox"><input class="al-checkbox__input" type="checkbox" checked><span class="al-checkbox__box" aria-hidden="true"></span></label></td>
-                        <td class="left"><strong>강남역 1번 출구 단말 (DANMAL-1)</strong><small>합정역 7번 출구</small></td>
+                        <td><label class="al-checkbox"><input class="al-checkbox__input" type="checkbox" checked><span
+                              class="al-checkbox__box" aria-hidden="true"></span></label></td>
+                        <td class="left">
+                          <div class="station-info">
+                            <strong class="station-name">강남역 1번 출구 단말 (DANMAL-1)</strong>
+                            <small class="station-desc">합정역 7번 출구</small>
+                          </div>
+                        </td>
                         <td><span class="al-badge al-badge--success al-badge--sm">성공</span></td>
-                        <td><div class="mdm-remote__snapshot mdm-remote__snapshot--empty"></div></td>
+                        <td>
+                          <div class="mdm-remote__snapshot mdm-remote__snapshot--empty"></div>
+                        </td>
+                        <td><button type="button" class="btn btn--white btn--sm">스냅샷 요청 <i
+                              class="ico-snapshot-sm"></i></button></td>
+                        <td><button type="button" class="btn btn--white btn--sm">재시작 <i
+                              class="ico-restart-sm"></i></button></td>
+                      </tr>
+                      <tr>
+                        <td><label class="al-checkbox"><input class="al-checkbox__input" type="checkbox" checked><span
+                              class="al-checkbox__box" aria-hidden="true"></span></label></td>
+                        <td class="left">
+                          <div class="station-info">
+                            <strong class="station-name">강남역 1번 출구 단말 (DANMAL-1)</strong>
+                            <small class="station-desc">합정역 7번 출구</small>
+                          </div>
+                        </td>
+                        <td><span class="al-badge al-badge--danger al-badge--sm">실패</span></td>
+                        <td>
+                          <div class="mdm-remote__snapshot mdm-remote__snapshot--empty"></div>
+                        </td>
                         <td><button type="button" class="btn btn--white btn--sm">스냅샷 요청</button></td>
                         <td><button type="button" class="btn btn--white btn--sm">재시작</button></td>
                       </tr>
                       <tr>
-                        <td><label class="al-checkbox"><input class="al-checkbox__input" type="checkbox" checked><span class="al-checkbox__box" aria-hidden="true"></span></label></td>
-                        <td class="left"><strong>강남역 1번 출구 단말 (DANMAL-1)</strong><small>합정역 7번 출구</small></td>
+                        <td><label class="al-checkbox"><input class="al-checkbox__input" type="checkbox" checked><span
+                              class="al-checkbox__box" aria-hidden="true"></span></label></td>
+                        <td class="left">
+                          <div class="station-info">
+                            <strong class="station-name">강남역 1번 출구 단말 (DANMAL-1)</strong>
+                            <small class="station-desc">합정역 7번 출구</small>
+                          </div>
+                        </td>
                         <td><span class="al-badge al-badge--danger al-badge--sm">실패</span></td>
-                        <td><div class="mdm-remote__snapshot mdm-remote__snapshot--empty"></div></td>
+                        <td>
+                          <div class="mdm-remote__snapshot mdm-remote__snapshot--empty"></div>
+                        </td>
                         <td><button type="button" class="btn btn--white btn--sm">스냅샷 요청</button></td>
                         <td><button type="button" class="btn btn--white btn--sm">재시작</button></td>
                       </tr>
                       <tr>
-                        <td><label class="al-checkbox"><input class="al-checkbox__input" type="checkbox" checked><span class="al-checkbox__box" aria-hidden="true"></span></label></td>
-                        <td class="left"><strong>강남역 1번 출구 단말 (DANMAL-1)</strong><small>합정역 7번 출구</small></td>
+                        <td><label class="al-checkbox"><input class="al-checkbox__input" type="checkbox" checked><span
+                              class="al-checkbox__box" aria-hidden="true"></span></label></td>
+                        <td class="left">
+                          <div class="station-info">
+                            <strong class="station-name">강남역 1번 출구 단말 (DANMAL-1)</strong>
+                            <small class="station-desc">합정역 7번 출구</small>
+                          </div>
+                        </td>
                         <td><span class="al-badge al-badge--danger al-badge--sm">실패</span></td>
-                        <td><div class="mdm-remote__snapshot mdm-remote__snapshot--empty"></div></td>
-                        <td><button type="button" class="btn btn--white btn--sm">스냅샷 요청</button></td>
-                        <td><button type="button" class="btn btn--white btn--sm">재시작</button></td>
-                      </tr>
-                      <tr>
-                        <td><label class="al-checkbox"><input class="al-checkbox__input" type="checkbox" checked><span class="al-checkbox__box" aria-hidden="true"></span></label></td>
-                        <td class="left"><strong>강남역 1번 출구 단말 (DANMAL-1)</strong><small>합정역 7번 출구</small></td>
-                        <td><span class="al-badge al-badge--danger al-badge--sm">실패</span></td>
-                        <td><div class="mdm-remote__snapshot mdm-remote__snapshot--empty"></div></td>
+                        <td>
+                          <div class="mdm-remote__snapshot mdm-remote__snapshot--empty"></div>
+                        </td>
                         <td><button type="button" class="btn btn--white btn--sm">스냅샷 요청</button></td>
                         <td><button type="button" class="btn btn--white btn--sm">재시작</button></td>
                       </tr>
@@ -392,6 +631,7 @@
       </div>
     </div>
     <div class="modal__footer">
+      <div></div>
       <div class="modal__actions">
         <button type="button" class="btn btn--primary btn--md" data-al-modal-close="mdm-remote-detail">확인</button>
       </div>
@@ -403,7 +643,8 @@
   <div class="modal modal--form w-960" role="dialog" aria-modal="true" tabindex="-1">
     <div class="modal__header">
       <h2 class="modal__title">원격 제어 상세</h2>
-      <button type="button" class="modal__close" data-al-modal-close="mdm-remote-history-detail" aria-label="닫기">닫기</button>
+      <button type="button" class="modal__close" data-al-modal-close="mdm-remote-history-detail"
+        aria-label="닫기">닫기</button>
     </div>
     <div class="modal__body">
       <div class="mdm-remote mdm-remote--history">
@@ -413,10 +654,13 @@
           </div>
           <div class="modal-card__body">
             <ul class="mdm-remote__meta">
-              <li class="mdm-remote__meta-item"><span class="label">원격 제어 명령</span><strong class="value">화면 갱신</strong></li>
-              <li class="mdm-remote__meta-item"><span class="label">원격 작업 ID</span><strong class="value">JOB-1</strong></li>
+              <li class="mdm-remote__meta-item"><span class="label">원격 제어 명령</span><strong class="value">화면 갱신</strong>
+              </li>
+              <li class="mdm-remote__meta-item"><span class="label">원격 작업 ID</span><strong class="value">JOB-1</strong>
+              </li>
               <li class="mdm-remote__meta-item"><span class="label">고객사</span><strong class="value">서울</strong></li>
-              <li class="mdm-remote__meta-item"><span class="label">작업 일시</span><strong class="value">2026-01-01 12:00</strong></li>
+              <li class="mdm-remote__meta-item"><span class="label">작업 일시</span><strong class="value">2026-01-01
+                  12:00</strong></li>
             </ul>
           </div>
         </section>
@@ -425,15 +669,15 @@
           <div class="modal-card__body">
             <div class="tabs tabs--line mdm-remote__tabs" data-al-tabs>
               <div class="tabs__list" role="tablist" aria-label="원격 이력 탭">
-                <button type="button" class="tabs__tab" role="tab" id="mdm-history-tab-a"
-                  data-al-tab="mdm-history-a" aria-selected="false" aria-controls="mdm-history-panel-a" tabindex="-1">원격 제어</button>
-                <button type="button" class="tabs__tab tabs__tab--active" role="tab" id="mdm-history-tab-b" data-al-tab="mdm-history-b"
-                  aria-selected="true" aria-controls="mdm-history-panel-b">원격 이력 ✓</button>
+                <button type="button" class="tabs__tab" role="tab" id="mdm-history-tab-a" data-al-tab="mdm-history-a"
+                  aria-selected="false" aria-controls="mdm-history-panel-a" tabindex="-1">원격 제어</button>
+                <button type="button" class="tabs__tab tabs__tab--active" role="tab" id="mdm-history-tab-b"
+                  data-al-tab="mdm-history-b" aria-selected="true" aria-controls="mdm-history-panel-b">원격 이력</button>
               </div>
               <div class="tabs__panel" role="tabpanel" id="mdm-history-panel-a" data-al-tabpanel="mdm-history-a"
                 aria-labelledby="mdm-history-tab-a" hidden>원격 제어 내용입니다.</div>
-              <div class="tabs__panel tabs__panel--active" role="tabpanel" id="mdm-history-panel-b" data-al-tabpanel="mdm-history-b"
-                aria-labelledby="mdm-history-tab-b">
+              <div class="tabs__panel tabs__panel--active" role="tabpanel" id="mdm-history-panel-b"
+                data-al-tabpanel="mdm-history-b" aria-labelledby="mdm-history-tab-b">
                 <div class="mdm-remote__toolbar">
                   <p class="mdm-remote__title">단말 원격 제어 이력</p>
                 </div>
@@ -444,7 +688,8 @@
                       <span class="num">1</span>
                       <span class="name">원격 제어 - 화면 갱신</span>
                       <span class="result">(<em>4</em>/10 성공)</span>
-                      <span class="date-wrap"><span class="date">2026-01-01 12:00</span></span>
+                      <span class="date-wrap"><span class="date">2026-01-01 <span
+                            class="time">12:00</span></span></span>
                       <span class="chevron" aria-hidden="true"></span>
                     </summary>
                   </details>
@@ -454,7 +699,8 @@
                       <span class="num">2</span>
                       <span class="name">원격 제어 - 화면 갱신</span>
                       <span class="result">(<em>8</em>/10 성공)</span>
-                      <span class="date-wrap"><span class="date">2026-01-01 12:00</span></span>
+                      <span class="date-wrap"><span class="date">2026-01-01 <span
+                            class="time">12:00</span></span></span>
                       <span class="chevron" aria-hidden="true"></span>
                     </summary>
                     <div class="mdm-remote-log__body">
@@ -482,8 +728,10 @@
       </div>
     </div>
     <div class="modal__footer">
+      <div></div>
       <div class="modal__actions">
-        <button type="button" class="btn btn--primary btn--md" data-al-modal-close="mdm-remote-history-detail">확인</button>
+        <button type="button" class="btn btn--primary btn--md"
+          data-al-modal-close="mdm-remote-history-detail">확인</button>
       </div>
     </div>
   </div>
@@ -498,9 +746,9 @@
     </div>
     <div class="modal__body">
       <div class="mdm-wrapper">
-        
+
         <div class="grid-content">
-          <div class="modal-card" style="height: 500px;">
+          <div class="modal-card overflow-y-auto" style="height: 500px;">
             <div class="modal-card__header">
               <h3 class="modal-card__title">상세 정보</h3>
             </div>
@@ -546,7 +794,7 @@
                   <span class="label">정류장</span>
                   <strong class="value">강남역 1번 출구</strong>
                 </li>
-              
+
                 <li class="round-list__item">
                   <span class="label">사용 여부</span>
                   <strong class="value"><span class="al-badge al-badge--success al-badge--sm">사용</span></strong>
@@ -570,7 +818,7 @@
               </ul>
             </div>
           </div>
-          <div class="modal-card" style="height: 280px;">
+          <div class="modal-card overflow-y-auto" style="height: 280px;">
             <div class="modal-card__header">
               <h3 class="modal-card__title">정류장 위치</h3>
             </div>
@@ -578,7 +826,7 @@
               지도 영역
             </div>
           </div>
-          <div class="modal-card" style="height: 204px;">
+          <div class="modal-card overflow-y-auto" style="height: 204px;">
             <div class="modal-card__body">
               <ul class="round-list">
                 <li class="round-list__item">
@@ -658,7 +906,7 @@
               <h3 class="modal-card__title">단말 정보 입력</h3>
               <p class="modal-card__note"><strong>*</strong> 표시는 필수 입력사항입니다.</p>
             </div>
-            
+
             <div class="modal-card__body">
               <form action="" class="form form--grid">
                 <div class="form__row">
@@ -847,7 +1095,8 @@
                     <tbody>
                       <tr>
                         <td>
-                          <label class="al-radio"><input class="al-radio__input" type="radio"><span class="al-radio__control" aria-hidden="true"></span></label>
+                          <label class="al-radio"><input class="al-radio__input" type="radio"><span
+                              class="al-radio__control" aria-hidden="true"></span></label>
                         </td>
                         <td class="left">강남역 1번출구</td>
                         <td class="left">BUT-STOP-1</td>
@@ -867,7 +1116,7 @@
             </div>
             <div class="modal-card__body">
               <div class="modal_card_content">
-               지도
+                지도
               </div>
             </div>
           </div>
@@ -1003,7 +1252,7 @@
     </div>
     <div class="modal__body">
       <div class="mdm-wrapper">
-        
+
         <div class="grid-content">
           <div class="modal-card" style="height: 500px;">
             <div class="modal-card__header">
@@ -1180,7 +1429,8 @@
                     <tbody>
                       <tr>
                         <td>
-                          <label class="al-radio"><input class="al-radio__input" type="radio"><span class="al-radio__control" aria-hidden="true"></span></label>
+                          <label class="al-radio"><input class="al-radio__input" type="radio"><span
+                              class="al-radio__control" aria-hidden="true"></span></label>
                         </td>
                         <td class="left">DANMAL-1</td>
                       </tr>
@@ -1275,7 +1525,8 @@
                     <tbody>
                       <tr>
                         <td>
-                          <label class="al-radio"><input class="al-radio__input" type="radio"><span class="al-radio__control" aria-hidden="true"></span></label>
+                          <label class="al-radio"><input class="al-radio__input" type="radio"><span
+                              class="al-radio__control" aria-hidden="true"></span></label>
                         </td>
                         <td>CST001</td>
                         <td>서울마을버스</td>
@@ -1370,7 +1621,7 @@
       </div>
     </div>
     <div class="modal__footer">
-      <button type="button" class="btn btn--secondary btn--md" data-al-modal-close="mdm-customer-select">취소</button>
+      <button type="button" class="btn btn--secondary btn--md" data-al-modal-close="mdm-customer-complete">취소</button>
       <div class="modal__actions">
         <button type="button" class="btn btn--secondary btn--md">이전</button>
         <button type="button" class="btn btn--primary btn--md">등록</button>
@@ -1405,7 +1656,7 @@
                 <div class="form__group form__group--horizontal">
                   <label class="form__label">사용여부</label>
                   <span class="form__field">
-                  <select class="form__select">
+                    <select class="form__select">
                       <option>사용</option>
                       <option>미사용</option>
                     </select>
@@ -1446,14 +1697,16 @@
                   </colgroup>
                   <thead>
                     <tr>
-                      <th><label class="al-checkbox"><input class="al-checkbox__input" type="checkbox"><span class="al-checkbox__box" aria-hidden="true"></span></label></th>
+                      <th><label class="al-checkbox"><input class="al-checkbox__input" type="checkbox"><span
+                            class="al-checkbox__box" aria-hidden="true"></span></label></th>
                       <th>단말 ID</th>
                       <th class="left">단말명</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr>
-                      <td><label class="al-checkbox"><input class="al-checkbox__input" type="checkbox"><span class="al-checkbox__box" aria-hidden="true"></span></label></td>
+                      <td><label class="al-checkbox"><input class="al-checkbox__input" type="checkbox"><span
+                            class="al-checkbox__box" aria-hidden="true"></span></label></td>
                       <td>WO-001</td>
                       <td class="left">
                         <div class="station-info">
@@ -1463,7 +1716,8 @@
                       </td>
                     </tr>
                     <tr>
-                      <td><label class="al-checkbox"><input class="al-checkbox__input" type="checkbox"><span class="al-checkbox__box" aria-hidden="true"></span></label></td>
+                      <td><label class="al-checkbox"><input class="al-checkbox__input" type="checkbox"><span
+                            class="al-checkbox__box" aria-hidden="true"></span></label></td>
                       <td>WO-001</td>
                       <td class="left">
                         <div class="station-info">
@@ -1473,7 +1727,8 @@
                       </td>
                     </tr>
                     <tr>
-                      <td><label class="al-checkbox"><input class="al-checkbox__input" type="checkbox"><span class="al-checkbox__box" aria-hidden="true"></span></label></td>
+                      <td><label class="al-checkbox"><input class="al-checkbox__input" type="checkbox"><span
+                            class="al-checkbox__box" aria-hidden="true"></span></label></td>
                       <td>WO-001</td>
                       <td class="left">
                         <div class="station-info">
@@ -1509,14 +1764,16 @@
                   </colgroup>
                   <thead>
                     <tr>
-                      <th><label class="al-checkbox"><input class="al-checkbox__input" type="checkbox"><span class="al-checkbox__box" aria-hidden="true"></span></label></th>
+                      <th><label class="al-checkbox"><input class="al-checkbox__input" type="checkbox"><span
+                            class="al-checkbox__box" aria-hidden="true"></span></label></th>
                       <th>단말 ID</th>
                       <th class="left">단말명</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr>
-                      <td><label class="al-checkbox"><input class="al-checkbox__input" type="checkbox" checked><span class="al-checkbox__box" aria-hidden="true"></span></label></td>
+                      <td><label class="al-checkbox"><input class="al-checkbox__input" type="checkbox" checked><span
+                            class="al-checkbox__box" aria-hidden="true"></span></label></td>
                       <td>WO-001</td>
                       <td class="left">
                         <div class="station-info">
@@ -1526,7 +1783,8 @@
                       </td>
                     </tr>
                     <tr>
-                      <td><label class="al-checkbox"><input class="al-checkbox__input" type="checkbox" checked><span class="al-checkbox__box" aria-hidden="true"></span></label></td>
+                      <td><label class="al-checkbox"><input class="al-checkbox__input" type="checkbox" checked><span
+                            class="al-checkbox__box" aria-hidden="true"></span></label></td>
                       <td>WO-002</td>
                       <td class="left">
                         <div class="station-info">
@@ -1536,7 +1794,8 @@
                       </td>
                     </tr>
                     <tr>
-                      <td><label class="al-checkbox"><input class="al-checkbox__input" type="checkbox" checked><span class="al-checkbox__box" aria-hidden="true"></span></label></td>
+                      <td><label class="al-checkbox"><input class="al-checkbox__input" type="checkbox" checked><span
+                            class="al-checkbox__box" aria-hidden="true"></span></label></td>
                       <td>WO-003</td>
                       <td class="left">
                         <div class="station-info">
@@ -1546,7 +1805,8 @@
                       </td>
                     </tr>
                     <tr>
-                      <td><label class="al-checkbox"><input class="al-checkbox__input" type="checkbox"><span class="al-checkbox__box" aria-hidden="true"></span></label></td>
+                      <td><label class="al-checkbox"><input class="al-checkbox__input" type="checkbox"><span
+                            class="al-checkbox__box" aria-hidden="true"></span></label></td>
                       <td>WO-002</td>
                       <td class="left">
                         <div class="station-info">
@@ -1556,7 +1816,8 @@
                       </td>
                     </tr>
                     <tr>
-                      <td><label class="al-checkbox"><input class="al-checkbox__input" type="checkbox"><span class="al-checkbox__box" aria-hidden="true"></span></label></td>
+                      <td><label class="al-checkbox"><input class="al-checkbox__input" type="checkbox"><span
+                            class="al-checkbox__box" aria-hidden="true"></span></label></td>
                       <td>WO-003</td>
                       <td class="left">
                         <div class="station-info">
@@ -1575,9 +1836,9 @@
                 <p>목록에서 단말을 선택하시면<br>지도에서 위치를 확인하실 수 있습니다.</p>
               </div>
             </div>
-            
+
           </div>
-          
+
         </div>
       </div>
     </div>
@@ -1597,8 +1858,7 @@
   <div class="modal modal--form w-960" role="dialog" aria-modal="true" tabindex="-1">
     <div class="modal__header">
       <h2 class="modal__title">그룹 단말 상세</h2>
-      <button type="button" class="modal__close" data-al-modal-close="mdm-group-detail"
-        aria-label="닫기">닫기</button>
+      <button type="button" class="modal__close" data-al-modal-close="mdm-group-detail" aria-label="닫기">닫기</button>
     </div>
     <div class="modal__body">
       <div class="mdm-group-detail">
@@ -1619,7 +1879,8 @@
                 </li>
                 <li class="mdm-group-detail__info-item">
                   <span class="label">사용자</span>
-                  <strong class="value value--multiline">최정우 | 010-1234-1234<br>원유건 | 010-1234-1234<br>김상훈 | 010-1234-1234<br>이진주 | 010-1234-1234<br>정현진 | 010-1234-1234</strong>
+                  <strong class="value value--multiline">최정우 | 010-1234-1234<br>원유건 | 010-1234-1234<br>김상훈 |
+                    010-1234-1234<br>이진주 | 010-1234-1234<br>정현진 | 010-1234-1234</strong>
                 </li>
                 <li class="mdm-group-detail__info-item">
                   <span class="label">등록일시</span>
@@ -1645,8 +1906,8 @@
             <div class="modal-card__header">
               <h3 class="modal-card__title">단말 목록</h3>
             </div>
-            <div class="modal-card__body">
-              <div class="design__grid-card design__grid-card--list">
+            <div class="modal-card__body" style="height: 100%;">
+              <div class="design__grid-card design__grid-card--list" style="height: calc(100% - 80px);">
                 <form class="form form--search" action="#" role="search" aria-label="단말 검색">
                   <span class="form__field form__field--search">
                     <input class="form__input" type="search" placeholder="검색어를 입력해주세요.">
@@ -1662,51 +1923,84 @@
                     </colgroup>
                     <thead>
                       <tr>
-                        <th><label class="al-checkbox"><input class="al-checkbox__input" type="checkbox"><span class="al-checkbox__box" aria-hidden="true"></span></label></th>
+                        <th><label class="al-checkbox"><input class="al-checkbox__input" type="checkbox"><span
+                              class="al-checkbox__box" aria-hidden="true"></span></label></th>
                         <th>단말 ID</th>
                         <th class="left">단말명</th>
                       </tr>
                     </thead>
                     <tbody>
                       <tr>
-                        <td><label class="al-checkbox"><input class="al-checkbox__input" type="checkbox" checked><span class="al-checkbox__box" aria-hidden="true"></span></label></td>
+                        <td><label class="al-checkbox"><input class="al-checkbox__input" type="checkbox" checked><span
+                              class="al-checkbox__box" aria-hidden="true"></span></label></td>
                         <td>WO-001</td>
-                        <td class="left"><div class="station-info"><strong class="station-name">합정역단말</strong><small class="station-desc">합정역 7번 출구</small></div></td>
+                        <td class="left">
+                          <div class="station-info"><strong class="station-name">합정역단말</strong><small
+                              class="station-desc">합정역 7번 출구</small></div>
+                        </td>
                       </tr>
                       <tr>
-                        <td><label class="al-checkbox"><input class="al-checkbox__input" type="checkbox" checked><span class="al-checkbox__box" aria-hidden="true"></span></label></td>
+                        <td><label class="al-checkbox"><input class="al-checkbox__input" type="checkbox" checked><span
+                              class="al-checkbox__box" aria-hidden="true"></span></label></td>
                         <td>WO-002</td>
-                        <td class="left"><div class="station-info"><strong class="station-name">강남역단말</strong><small class="station-desc">신논현역 입구</small></div></td>
+                        <td class="left">
+                          <div class="station-info"><strong class="station-name">강남역단말</strong><small
+                              class="station-desc">신논현역 입구</small></div>
+                        </td>
                       </tr>
                       <tr>
-                        <td><label class="al-checkbox"><input class="al-checkbox__input" type="checkbox" checked><span class="al-checkbox__box" aria-hidden="true"></span></label></td>
+                        <td><label class="al-checkbox"><input class="al-checkbox__input" type="checkbox" checked><span
+                              class="al-checkbox__box" aria-hidden="true"></span></label></td>
                         <td>WO-003</td>
-                        <td class="left"><div class="station-info"><strong class="station-name">강남역단말</strong><small class="station-desc">양재역 앞</small></div></td>
+                        <td class="left">
+                          <div class="station-info"><strong class="station-name">강남역단말</strong><small
+                              class="station-desc">양재역 앞</small></div>
+                        </td>
                       </tr>
                       <tr>
-                        <td><label class="al-checkbox"><input class="al-checkbox__input" type="checkbox"><span class="al-checkbox__box" aria-hidden="true"></span></label></td>
+                        <td><label class="al-checkbox"><input class="al-checkbox__input" type="checkbox"><span
+                              class="al-checkbox__box" aria-hidden="true"></span></label></td>
                         <td>WO-002</td>
-                        <td class="left"><div class="station-info"><strong class="station-name">강남역단말</strong><small class="station-desc">신논현역 입구</small></div></td>
+                        <td class="left">
+                          <div class="station-info"><strong class="station-name">강남역단말</strong><small
+                              class="station-desc">신논현역 입구</small></div>
+                        </td>
                       </tr>
                       <tr>
-                        <td><label class="al-checkbox"><input class="al-checkbox__input" type="checkbox"><span class="al-checkbox__box" aria-hidden="true"></span></label></td>
+                        <td><label class="al-checkbox"><input class="al-checkbox__input" type="checkbox"><span
+                              class="al-checkbox__box" aria-hidden="true"></span></label></td>
                         <td>WO-003</td>
-                        <td class="left"><div class="station-info"><strong class="station-name">강남역단말</strong><small class="station-desc">양재역 앞</small></div></td>
+                        <td class="left">
+                          <div class="station-info"><strong class="station-name">강남역단말</strong><small
+                              class="station-desc">양재역 앞</small></div>
+                        </td>
                       </tr>
                       <tr>
-                        <td><label class="al-checkbox"><input class="al-checkbox__input" type="checkbox" checked><span class="al-checkbox__box" aria-hidden="true"></span></label></td>
+                        <td><label class="al-checkbox"><input class="al-checkbox__input" type="checkbox" checked><span
+                              class="al-checkbox__box" aria-hidden="true"></span></label></td>
                         <td>WO-003</td>
-                        <td class="left"><div class="station-info"><strong class="station-name">강남역단말</strong><small class="station-desc">양재역 앞</small></div></td>
+                        <td class="left">
+                          <div class="station-info"><strong class="station-name">강남역단말</strong><small
+                              class="station-desc">양재역 앞</small></div>
+                        </td>
                       </tr>
                       <tr>
-                        <td><label class="al-checkbox"><input class="al-checkbox__input" type="checkbox"><span class="al-checkbox__box" aria-hidden="true"></span></label></td>
+                        <td><label class="al-checkbox"><input class="al-checkbox__input" type="checkbox"><span
+                              class="al-checkbox__box" aria-hidden="true"></span></label></td>
                         <td>WO-002</td>
-                        <td class="left"><div class="station-info"><strong class="station-name">강남역단말</strong><small class="station-desc">신논현역 입구</small></div></td>
+                        <td class="left">
+                          <div class="station-info"><strong class="station-name">강남역단말</strong><small
+                              class="station-desc">신논현역 입구</small></div>
+                        </td>
                       </tr>
                       <tr>
-                        <td><label class="al-checkbox"><input class="al-checkbox__input" type="checkbox"><span class="al-checkbox__box" aria-hidden="true"></span></label></td>
+                        <td><label class="al-checkbox"><input class="al-checkbox__input" type="checkbox"><span
+                              class="al-checkbox__box" aria-hidden="true"></span></label></td>
                         <td>WO-003</td>
-                        <td class="left"><div class="station-info"><strong class="station-name">강남역단말</strong><small class="station-desc">양재역 앞</small></div></td>
+                        <td class="left">
+                          <div class="station-info"><strong class="station-name">강남역단말</strong><small
+                              class="station-desc">양재역 앞</small></div>
+                        </td>
                       </tr>
                     </tbody>
                   </table>
@@ -1727,8 +2021,7 @@
       </div>
     </div>
     <div class="modal__footer">
-      <button type="button" class="btn btn--secondary btn--md"
-        data-al-modal-close="mdm-group-detail">취소</button>
+      <button type="button" class="btn btn--secondary btn--md" data-al-modal-close="mdm-group-detail">취소</button>
       <div class="modal__actions">
         <button type="button" class="btn btn--primary btn--md">등록</button>
       </div>
@@ -1746,28 +2039,47 @@
     <div class="modal__body">
       <div class="mdm-remote-request">
         <section class="modal-card mdm-remote-request__card">
-          <div class="modal-card__body">
+          <div class="">
             <h3 class="mdm-remote-request__title">선택 단말 목록</h3>
             <div class="table-wrapper mdm-remote-request__table-wrap">
               <table class="al-table">
                 <colgroup>
                   <col style="width: 120px;">
                   <col style="width: auto;">
-                  <col style="width: 90px;">
+                  <col style="width: 110px;">
                 </colgroup>
                 <thead>
                   <tr>
-                    <th>단말 ID</th>
+                    <th class="left">단말 ID</th>
                     <th class="left">단말명</th>
                     <th></th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr><td>DM-001</td><td class="left">석촌역 단말</td><td><button type="button" class="btn btn--white btn--sm">삭제</button></td></tr>
-                  <tr><td>DM-001</td><td class="left">석촌역 단말</td><td><button type="button" class="btn btn--white btn--sm">삭제</button></td></tr>
-                  <tr><td>DM-001</td><td class="left">석촌역 단말</td><td><button type="button" class="btn btn--white btn--sm">삭제</button></td></tr>
-                  <tr><td>DM-001</td><td class="left">석촌역 단말</td><td><button type="button" class="btn btn--white btn--sm">삭제</button></td></tr>
-                  <tr><td>DM-001</td><td class="left">석촌역 단말</td><td><button type="button" class="btn btn--white btn--sm">삭제</button></td></tr>
+                  <tr>
+                    <td class="left">DM-001</td>
+                    <td class="left">석촌역 단말</td>
+                    <td><button type="button" class="btn btn--white btn--sm">삭제 <i class="ico-delete-sm"></i></button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="left">DM-001</td>
+                    <td class="left">석촌역 단말</td>
+                    <td><button type="button" class="btn btn--white btn--sm">삭제 <i class="ico-delete-sm"></i></button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="left">DM-001</td>
+                    <td class="left">석촌역 단말</td>
+                    <td><button type="button" class="btn btn--white btn--sm">삭제 <i class="ico-delete-sm"></i></button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="left">DM-001</td>
+                    <td class="left">석촌역 단말</td>
+                    <td><button type="button" class="btn btn--white btn--sm">삭제 <i class="ico-delete-sm"></i></button>
+                    </td>
+                  </tr>
                 </tbody>
               </table>
             </div>
@@ -1790,7 +2102,7 @@
       </div>
     </div>
     <div class="modal__footer">
-      <button type="button" class="btn btn--secondary btn--md" data-al-modal-close="mdm-remote-request">취소</button>
+      <button type="button" class="btn btn--tertiary btn--md" data-al-modal-close="mdm-remote-request">취소</button>
       <div class="modal__actions"></div>
     </div>
   </div>

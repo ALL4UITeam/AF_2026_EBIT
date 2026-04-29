@@ -14,8 +14,10 @@
 ================================================
    2. 모달 관련 스타일
 ================================================
-
 */
+.overflow-y-auto{
+  overflow-y: auto;
+}
 .grid-content{
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
@@ -50,6 +52,9 @@
   }
 }
 
+.w-900{
+  width: 900px;
+}
 .w-960{
   width: 960px;
 }
@@ -134,13 +139,17 @@
     display: grid;
     grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
     grid-template-rows: minmax(0, 1fr) 206px;
+    grid-template-areas:
+      "basic list"
+      "map list";
     gap: 20px;
   }
 
   &__card{
-    margin-top: 0;
+
     padding: 0;
     overflow: hidden;
+    margin-top: 0 !important;
 
     .modal-card__header{
       margin: 0 28px;
@@ -153,19 +162,22 @@
   }
 
   &__card--basic{
+    grid-area: basic;
     min-height: 0;
   }
 
   &__card--list{
+    grid-area: list;
     grid-row: 1 / span 2;
     min-height: 0;
-
+    margin-top: 0 !important;
     .modal-card__body{
       padding-top: 0;
     }
   }
 
   &__card--map{
+    grid-area: map;
     .modal-card__body{
       padding: 0;
       height: 100%;
@@ -333,7 +345,7 @@
     align-items: center;
     justify-content: space-between;
     gap: 12px;
-    margin-bottom: 16px;
+    margin-bottom: 12px;
   }
 
   &__title{
@@ -368,71 +380,44 @@
   }
 
   &__table{
-    thead th{
-      font-size: 17px;
-      color: #002236;
-      background: #F0F7FF;
-    }
-
-    tbody td{
-      font-size: 17px;
-      vertical-align: middle;
-
-      strong{
-        font-size: 17px;
-        font-weight: 500;
-        color: #1E293B;
-      }
-
-      small{
-        display: block;
-        margin-top: 2px;
-        font-size: 15px;
-        color: #64748B;
-      }
-    }
-
-    .btn{
-      min-width: 98px;
-      height: 38px;
-      font-size: 17px;
-      border-radius: 6px;
-    }
+    
   }
 
   &__snapshot{
-    width: 48px;
-    height: 48px;
-    border-radius: 8px;
-    background-color: #E2E8F0;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: 24px 24px;
-
-    &--empty{
-      position: relative;
-    }
-
-    &--empty::before,
-    &--empty::after{
-      content: '';
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      width: 20px;
-      height: 2px;
-      background: #64748B;
-      transform-origin: center;
-    }
-
-    &--empty::before{
-      transform: translate(-50%, -50%) rotate(45deg);
-    }
-
-    &--empty::after{
-      transform: translate(-50%, -50%) rotate(-45deg);
-    }
+    width: 52px;
+    height: 52px;
+    background: url('/assets/images/common/ico-snapshot.svg') no-repeat center;
   }
+}
+.btn:has(.ico-delete-sm){
+  padding-left: 10px;
+  padding-right: 10px;
+}
+.btn:has(.ico-snapshot-sm),
+.btn:has(.ico-restart-sm){
+  padding-left: 10px;
+  padding-right: 10px;
+}
+.ico-snapshot-sm{
+  width: 16px;
+  height: 16px;
+  background: url('/assets/images/common/ico-snapshot-sm.svg') no-repeat center;
+  display: inline-block;
+  vertical-align: middle;
+}
+.ico-restart-sm{
+  width: 16px;
+  height: 16px;
+  background: url('/assets/images/common/ico-restart-sm.svg') no-repeat center;
+  display: inline-block;
+  vertical-align: middle;
+}
+.ico-delete-sm{
+  width: 16px;
+  height: 16px;
+  background: url('/assets/images/common/ico-delete-sm.svg') no-repeat center;
+  display: inline-block;
+  vertical-align: middle;
 }
 
 .mdm-remote-log{
@@ -451,8 +436,9 @@
     list-style: none;
     display: flex;
     align-items: center;
-    gap: 12px;
-    padding: 12px 16px;
+    position: relative;
+    gap: 8px;
+    padding: 8px 12px;
     cursor: pointer;
 
     &::-webkit-details-marker{
@@ -462,8 +448,11 @@
     .num{
       color: #014569;
       font-size: 15px;
-      font-weight: 800;
+      font-weight: 900;
       text-align: center;
+      width: 32px;
+      height: 32px;
+      line-height: 32px;
     }
 
     .name{
@@ -481,12 +470,11 @@
       em{
         font-style: normal;
         color: #1C8CF4;
-        font-weight: 700;
+        font-weight: 900;
       }
     }
 
     .date-wrap{
-      margin-left: auto;
       padding-left: 8px;
       border-left: 1px solid #E2E8F0;
       display: flex;
@@ -494,37 +482,25 @@
     }
 
     .date{
-      color: #334155;
+      color: #0F172A;
       font-size: 15px;
       white-space: nowrap;
     }
+    .time{
+      color: #475569;
+    }
 
     .chevron{
-      width: 18px;
-      height: 18px;
-      margin-left: 8px;
-      position: relative;
+      width: 9px;
+      height: 5px;
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
       flex-shrink: 0;
-
-      &::before,
-      &::after{
-        content: '';
-        position: absolute;
-        top: 8px;
-        width: 7px;
-        height: 2px;
-        background: #334155;
-      }
-
-      &::before{
-        left: 3px;
-        transform: rotate(45deg);
-      }
-
-      &::after{
-        right: 3px;
-        transform: rotate(-45deg);
-      }
+      transform: rotate(0deg);
+      background: url('/assets/images/common/ico-chevron.svg') no-repeat center;
+      transition: transform 0.3s ease;
     }
   }
 
@@ -569,30 +545,6 @@
     line-height: 1.5;
   }
 
-  &__table-wrap{
-    max-height: 360px;
-    overflow-y: auto;
-    border: 0;
-
-    thead th{
-      background: #F0F7FF;
-      color: #002236;
-      font-size: 15px;
-    }
-
-    tbody td{
-      font-size: 17px;
-      vertical-align: middle;
-    }
-
-    .btn{
-      min-width: 60px;
-      height: 32px;
-      font-size: 15px;
-      border-radius: 4px;
-      padding: 0 10px;
-    }
-  }
 
   &__divider{
     border-top: 1px dashed #CBD5E1;
@@ -642,6 +594,7 @@
 }
 .round-list__item{
   display: flex;
+  align-items: center;
   gap:10px;
   .label{
     position: relative;
@@ -667,6 +620,24 @@
 
     }
   }
+
+  
+  .danger {
+    color: #de3412 !important;
+    font-weight: 900 !important;
+    small{
+      color: #BD2C0F;
+    }
+  }
+
+  .warn {
+    font-weight: 900 !important;
+    color: #ffb114 !important;
+    small{
+      color: #C78500;
+    }
+  }
+  
   .value{
     color: var(--gray-g-80, #1E293B);
     font-family: "Pretendard GOV";
@@ -697,10 +668,10 @@
   }
 
   &__head-box {
-    min-height: 96px;
-    border: 1px solid #e2e8f0;
+    min-height: 91px;
     border-radius: 12px;
-    background: #f1f5f9;
+    border: 1px solid var(--gray-g-20, #E2E8F0);
+    background: var(--gray-g-10, #F1F5F9);
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -751,6 +722,9 @@
       font-size: 19px;
       font-weight: 700;
       color: #0f172a;
+      height: 48px;
+      display: flex;
+      align-items: center;
     }
 
     ul {
@@ -759,7 +733,7 @@
       list-style: none;
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 12px 20px;
+      gap: 12px;
     }
 
     li {
@@ -774,15 +748,22 @@
         font-size: 15px;
         color: #475569;
       }
+      small{
+        font-weight: 400 !important;
+        font-size: 13px !important;
+      }
+
+      .value{
+        .time{
+          font-size: 15px;
+          color: #475569;
+        }
+      }
     }
 
-    .danger {
-      color: #de3412;
-    }
-
-    .warn {
-      color: #ffb114;
-    }
+  }
+  .mb-20{
+    margin-bottom: 20px;
   }
 
   &__block--dashed {
@@ -795,16 +776,35 @@
     border: 1px solid #badaff;
     border-radius: 12px;
     padding: 16px;
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr)) auto;
-    gap: 8px;
     margin-bottom: 12px;
+    display: flex;
+    gap:0 12px
+  }
+  .form__date_group{
+    display: flex;
+    align-items: center;
+    gap:0 10px;
+    > label{
+      color: var(--gray-g-80, #1E293B);
+      font-family: "Pretendard GOV";
+      font-size: 17px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 150%; /* 25.5px */
+      white-space: nowrap;
+    }
+    .form__field--date{
+      width: 156px;
+    }
+    .form__field--time{
+      width: 110px;
+    }
   }
 
   &__chart-grid {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 12px 20px;
+    gap: 12px;
     margin-bottom: 16px;
 
     .chart-placeholder {
@@ -819,6 +819,11 @@
       font-weight: 700;
       color: rgba(30, 33, 36, 0.5);
     }
+  }
+
+  .divider{
+    border-bottom: 1px dashed var(--gray-g-30, #CBD5E1);
+    margin: 20px 0;
   }
 
   &__table-head {
@@ -838,13 +843,61 @@
       color: #03699c;
       font-size: 25px;
     }
+    .form__field{
+      width: 122px;
+    }
   }
 
+  .time-wrap{
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    &.inline{
+      flex-direction: row;
+      gap: 4px;
+    }
+    span{
+      white-space: nowrap;
+    }
+    .time{
+      font-size: 15px;
+      color: #475569;
+    }
+  }
+  .unit-value{
+    small{
+      font-size: 13px;
+      color: #475569;
+    }
+  }
+
+  .unit-value-wrap{
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    .unit-value-desc{
+      font-size: 13px;
+      color: #475569;
+    }
+  }
+  .unit-text-wrap{
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    .unit-text{
+      font-size: 17px;
+      color: #1E293B;
+    }
+    .unit-text-desc{
+      font-size: 15px;
+      color: #475569;
+      white-space: nowrap;
+    }
+  }
   &__remote-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 20px;
-
     > .left,
     > .right {
       min-width: 0;
@@ -860,6 +913,11 @@
       font-size: 19px;
       font-weight: 700;
       color: #0f172a;
+      display: flex;
+      height: 48px;
+      align-items: center;
+      gap: 10px;
+      align-self: stretch;
     }
   }
 
@@ -898,7 +956,7 @@
 
   &__dashed {
     border-top: 1px dashed #cbd5e1;
-    margin: 16px 0;
+    margin: 20px 0;
   }
 
   .image-placeholder {

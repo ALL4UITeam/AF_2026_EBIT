@@ -306,43 +306,44 @@
         pointer-events: none;
     }
 
-    .form__icon-btn {
-        position: absolute;
-        right: 7px;
-        top: 50%;
-        width: 24px;
-        height: 24px;
-        padding: 0;
-        border: 0;
-        background: transparent;
-        transform: translateY(-50%);
-        display: grid;
-        place-items: center;
-
-        img {
-            width: 16px;
-            height: 16px;
-            display: block;
-        }
-
-        &--calendar {
-            background: url('/assets/images/icon/ico-calendar.svg') no-repeat center / 16px 16px;
-        }
-
-        &--search {
-            background: url('/assets/images/icon/ico-search.svg') no-repeat center / 16px 16px;
-        }
-
-        &:focus-visible {
-            outline: 2px solid var(--al-color-primary);
-            outline-offset: 1px;
-            border-radius: 4px;
-        }
-    }
+    
 
     @media (max-width: 1200px) {
         grid-template-columns: repeat(2, minmax(0, 1fr));
         width: 100%;
+    }
+}
+.form__icon-btn {
+    position: absolute;
+    right: 7px;
+    top: 50%;
+    width: 24px;
+    height: 24px;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    transform: translateY(-50%);
+    display: grid;
+    place-items: center;
+
+    img {
+        width: 16px;
+        height: 16px;
+        display: block;
+    }
+
+    &--calendar {
+        background: url('/assets/images/icon/ico-calendar.svg') no-repeat center / 16px 16px;
+    }
+
+    &--search {
+        background: url('/assets/images/icon/ico-search.svg') no-repeat center / 16px 16px;
+    }
+
+    &:focus-visible {
+        outline: 2px solid var(--al-color-primary);
+        outline-offset: 1px;
+        border-radius: 4px;
     }
 }
 
